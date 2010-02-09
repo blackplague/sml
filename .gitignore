@@ -1,0 +1,8 @@
+*.pdf
+*.m~
+*.tex~
+*.sty~
+*.aux
+*.log
+*.out
+./week?/slides*
