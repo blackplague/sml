@@ -34,8 +34,6 @@ function [ output_args ] = mandatory_exercise( input_args )
     
         tmp = [mu_ml(1) * numberOnes(:,1)'; mu_ml(2) * numberOnes(:,2)'];
         
-        %sigma_est = zeros(2,2);
-    
         sigma_est = 1 / (N - 1) * (y - tmp)*(y - tmp)';
 
     end
@@ -241,13 +239,84 @@ function [ output_args ] = mandatory_exercise( input_args )
         end        
     end
     
+    function exercise18( image_path )
+       
+        original_image = im2double (imread( image_path ));
+        
+        t_data = extract_training_region( original_image );
+        
+        ts = size(t_data);
+        
+        % Calculate mean vector for RGB in test region
+        mu_ml = (1 / length(t_data)) * sum(t_data);
+        numberOnes = ones(ts(1), ts(2));
+    
+        tmp = [mu_ml(1) * numberOnes(:,1)'; mu_ml(2) * numberOnes(:,2)' ...
+            ; mu_ml(3) * numberOnes(:,3)'];
+        
+        sigma = cov(t_data);
+
+        %RGB = im2double (imread ( './images/kande1.jpg' ));
+
+        new_image = getProbability(original_image, mu_ml, sigma);
+        
+        figure, imshow(new_image);
+                
+    end
+
+    function [ new_image ] = getProbability( image, mu_ml, sigma)
+
+        sqr_det_sigma = sqrt(det(sigma));
+        
+        inverse_sigma=inv(sigma);
+        
+        [sm sn u] = size(image);
+        
+        new_image = zeros(sm,sn);
+        
+        % Needs normalization
+        for m=1:sm
+            for n=1:sn
+                x = [image(m,n,1); image(m,n,2); image(m,n,3)];
+                
+                new_image(m,n) = 1/(2*pi)^(3/2)*1/sqr_det_sigma * ...
+                    exp(-0.5*(x - mu_ml')'*inverse_sigma*(x - mu_ml'));
+            end
+        end
+    end
+
+    function [ training_data ] = extract_training_region( image )
+       
+        %% Read Image
+        
+        %% Define training and test regions
+        tll = [328, 150]; % training: lower left
+        tur = [264, 330]; % training: upper right
+        
+        %% Show image and regions
+        figure,
+        hold on
+        plot ([tur(2), tll(2), tll(2), tur(2), tur(2)], ...
+            [tur(1), tur(1), tll(1), tll(1), tur(1)], ...
+            'k-', 'linewidth', 2);
+        text (tll(2), tur(1)-15, 'Training');
+        
+        hold off
+        
+        %% Extract regions
+        training_data = image(tur(1):tll(1), tll(2):tur(2), :);
+        training_data = reshape (training_data, size (training_data, 1) * size (training_data, 2), 3);
+        
+    end
+
+
     function run( ~ )
         
 %         numberOfPoints = 100;
         
 %         mu = 1.0;
         
-        sigma = [ 0.3 0.2; 0.2 0.2 ];
+%         sigma = [ 0.3 0.2; 0.2 0.2 ];
         
 %         y = exercise11( mu, sigma, numberOfPoints );
         
@@ -266,8 +335,13 @@ function [ output_args ] = mandatory_exercise( input_args )
 %         exercise15( samples )
                 
         % samplertype is either exact or MH, stepsize = 0.5
-        samplessize = 500; samplertype = 'exact'; stepsize = 0.7;
-        exercise16( sigma, samplessize, samplertype, stepsize )
+%         samplessize = 500; samplertype = 'exact'; stepsize = 0.7;
+%         exercise16( sigma, samplessize, samplertype, stepsize )
+        
+        image_path = './images/';
+        image_name = 'kande1.jpg';
+
+        exercise18( strcat( image_path, image_name ))
         
     end
 
