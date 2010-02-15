@@ -312,23 +312,23 @@ function [ output_args ] = mandatory_exercise( input_args )
 
     function run( ~ )
         
-%         numberOfPoints = 100;
+        numberOfPoints = 100;
         
-%         mu = 1.0;
+        mu = 1.0;
         
-%         sigma = [ 0.3 0.2; 0.2 0.2 ];
+        sigma = [ 0.3 0.2; 0.2 0.2 ];
         
-%         y = exercise11( mu, sigma, numberOfPoints );
+        y = exercise11( mu, sigma, numberOfPoints );
         
-%         [ mu_ml ] = exercise12a( y );
+        mu_ml = exercise12a( y );
         
-%         sigma = exercise12b( mu_ml, y, numberOfPoints );
+        sigma = exercise12b( mu_ml, y, numberOfPoints );
     
 %         exercise12c( [mu mu], mu_ml, y );
         
 %         exercise13( y, 5 );
         
-%         exercise14( y, sigma )
+        exercise14( y, sigma )
         
 %         samples = [ power(10,1); power(10,2); power(10,3) ];
         
