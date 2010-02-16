@@ -1,4 +1,4 @@
-\documentclass[a4paper, 10pt, final]{article}
+ \documentclass[a4paper, 10pt, final]{article}
 
 \usepackage{a4wide}
 
@@ -86,21 +86,21 @@ seen from the drawing, the points are placed really close.
   \centering
   \includegraphics[width=0.6\textwidth]{images/q1_3a}
   \caption{a shows $p(x_1)$ and b shows $p(x_2)$ using 11 bins.}
-  \label{fig:q1_3a}
+  \label{fig:q3_3a}
 \end{figure}
 
 \begin{figure}[!htpb]
   \centering
   \includegraphics[width=0.6\textwidth]{images/q1_3b}
   \caption{a shows $p(x_1)$ and b shows $p(x_2)$ using 5 bins.}
-  \label{fig:q1_3b}
+  \label{fig:q3_3b}
 \end{figure}
 
 \begin{figure}[!htpb]
   \centering
   \includegraphics[width=0.6\textwidth]{images/q1_3c}
   \caption{a shows $p(x_1)$ and b shows $p(x_2)$ using 25 bins.}
-  \label{fig:q1_3c}
+  \label{fig:q3_3c}
 \end{figure}
 
 There is no best way to select the bin width. If it is selected too
@@ -123,37 +123,80 @@ numbers.
   \centering
   \includegraphics[width=0.6\textwidth]{images/q1_4_100}
   \caption{Shows 3d histogram of 100 datapoints using $10$x$10$ bins}
-  \label{fig:q1_4_100}
+  \label{fig:q4_4_100}
 \end{figure}
 
 \begin{figure}[!htpb]
   \centering
   \includegraphics[width=0.6\textwidth]{images/q1_4_1000}
   \caption{Shows 3d histogram of 1000 datapoints using $10$x$10$ bins}
-  \label{fig:q1_4_1000}
+  \label{fig:q4_4_1000}
 \end{figure}
 
 \begin{figure}[!htpb]
   \centering
   \includegraphics[width=0.6\textwidth]{images/q1_4_10000}
   \caption{Shows 3d histogram of 10000 datapoints using $10$x$10$ bins}
-  \label{fig:q1_4_10000}
+  \label{fig:q4_4_10000}
 \end{figure}
 
 \begin{figure}[!htpb]
   \centering
   \includegraphics[width=0.6\textwidth]{images/q1_4_10000_b15}
   \caption{Shows 3d histogram of 10000 datapoints using $15$x$15$ bins}
-  \label{fig:q1_4_10000_b15}
+  \label{fig:q4_4_10000_b15}
 \end{figure}
 
 \begin{figure}[!htpb]
   \centering
   \includegraphics[width=0.6\textwidth]{images/q1_4_10000_b20}
   \caption{Shows 3d histogram of 10000 datapoints using $20$x$20$ bins}
-  \label{fig:q1_4_10000_b20}
+  \label{fig:q4_4_10000_b20}
 \end{figure}
 
+\subsection*{Question 1.5}
+In graph \ref{fig:q5} shows the difference between $\mu _y$, $\hat{y}$ convergence to 0 as $L -> \infty$
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/q5_L10_L100_L1000}
+  \caption{Shows the difference between $\mu _y$ and $\hat{y}$, at point 10, 100, 1000}
+  \label{fig:q5}
+\end{figure}
+
+In graph \ref{fig:q5_log} we have takent the log of the difference, and
+since the difference is are approximation for at exp function, the
+plottet line shot be liner. Bot it isent, becorce of the bade aprox or
+the large step size.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/q5_L10_L100_L1000_log}
+  \caption{Shows the logarithm difference between $\mu _y$ and $\hat{y}$, at point 10, 100, 1000}
+  \label{fig:q5_log}
+\end{figure}
+
+\subsection*{Question 1.6}
+
+The auto-correlation is non-zero, since we have feawer samples, and the
+are distributes randomly , if we increase the number of samples L, the
+auto-correlation get small, see figure \ref{L10000}.When running the
+program menny timse, we get diffrent result, bot the paton is the same.
+If we set L to 10000 the auto-correlation get very small, and chaces
+less betwin run, se figur \ref{L10000} this is at we ekspectet, since
+more sampels, decrices the distens betwine the point.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/L10000}
+  \caption{auto-correlation, when $L = 10000$}
+  \label{L10000}
+\end{figure}
+\newpage
+\newpage
+\newpage
+\newpage
+\newpage
 
 %% \begin{figure}
 %% \centering
