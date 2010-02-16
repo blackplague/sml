@@ -228,7 +228,7 @@ accepted samples from the random walk can be seen.
   \label{fig:q1_7b}
 \end{figure}
 
-Give a rough estimate of the number of rejected samples
+A rough estimate would be 4-5\% effective samples, it varies per run, but effective samples happens approximately every 20 samples or so.
 
 The proposal distribution is a gaussian distribution as a result of
 using \emph{randn} in matlab. If the proposal distribution appeared in
@@ -238,7 +238,7 @@ distribution itself was not simple and fast to calculate.
 Figure \ref{fig:q1_7c} show the autocorrelation using stepsize $0.2$,
 because we do not take that long steps, we need more samples to obtain
 independance between them. It also shows that within lag $50$ we do
-not get that close to $0$. Figure \ref{fig:1_7d} show the resulting
+not get that close to $0$. Figure \ref{fig:q1_7d} show the resulting
 distribution and accepted samples.
 
 \begin{figure}[!htpb]
