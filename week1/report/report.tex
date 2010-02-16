@@ -54,7 +54,7 @@ linkcolor=black,%
 urlcolor=black,%
 bookmarksopen=false,
 pdftitle={Statistical Methods for Machine Learning - Mandatory Project 1},
-pdfauthor={Kasper Steenstrup \& Michael Andersen}
+pdfauthor={Kasper Steenstrup, Michael Andersen \& Esben Skaarup}
 }
 
 \begin{document}
@@ -206,6 +206,107 @@ more samples, decreases the distance between the points.
 %% \label{fig:original}
 %% \end{figure}
 
+\subsection*{Question 1.7}
+
+\begin{figure}[!htpb]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/q1_7a}
+  \caption{Shows the autocorrelation plot of Metropolis-Hastings algorithm, running 500 samples, using 0.5 stepsize.}
+  \label{fig:q1_7a}
+\end{figure}
+
+From figure \ref{fig:q1_7a} is can be seen that at first the samples
+are dependant on each other but as the random walk progresses they
+become more and more independent. And when reaching lag $50$ they are
+nearly independent. From figure \ref{fig:q1_7b} the result of the
+accepted samples from the random walk can be seen.
+
+\begin{figure}[!htpb]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/q1_7b}
+  \caption{}
+  \label{fig:q1_7b}
+\end{figure}
+
+Give a rough estimate of the number of rejected samples
+
+The proposal distribution is a gaussian distribution as a result of
+using \emph{randn} in matlab. If the proposal distribution appeared in
+the acceptance distribution, it would mean that the proposal
+distribution itself was not simple and fast to calculate. 
+
+Figure \ref{fig:q1_7c} show the autocorrelation using stepsize $0.2$,
+because we do not take that long steps, we need more samples to obtain
+independance between them. It also shows that within lag $50$ we do
+not get that close to $0$. Figure \ref{fig:1_7d} show the resulting
+distribution and accepted samples.
+
+\begin{figure}[!htpb]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/q1_7c}
+  \caption{}
+  \label{fig:q1_7c}
+\end{figure}
+
+\begin{figure}[!htpb]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/q1_7d}
+  \caption{}
+  \label{fig:q1_7d}
+\end{figure}
+
+Changing the stepsize to $0.9$ seems to be an appropiate choice, the autocorrelation now converges fast towards zero. Although we are now forced to take large steps. This can be seen by looking at the figure \ref{fig:q1_7e}-\ref{fig:q1_7f}
+
+
+\begin{figure}[!htpb]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/q1_7e}
+  \caption{}
+  \label{fig:q1_7e}
+\end{figure}
+
+\begin{figure}[!htpb]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/q1_7f}
+  \caption{}
+  \label{fig:q1_7f}
+\end{figure}
+
+Using a larger stepsize results in the random walk stepping outside of the distribution, as we step outside of many times, a larger proportion of samples will be accepted.
+An optimal value would be problem dependent, and would not apply to if transferred to another problem, but our best choice would be $0.9$ as it seems to converge fastest.
+
+\begin{figure}[!htpb]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/q1_7g}
+  \caption{}
+  \label{fig:q1_7g}
+\end{figure}
+
+\begin{figure}[!htpb]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/q1_7h}
+  \caption{}
+  \label{fig:q1_7h}
+\end{figure}
+
+The two figures \ref{fig:q1_7g} and \ref{fig:q1_7h} shows when we discard the first $250$ samples, this results in most of the remaining samples being accepted. Though we could probably go even further and discard even more, especially if we chose more samples instead of $500$.
+
+
+\begin{figure}[!htpb]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/q1_7i}
+  \caption{}
+  \label{fig:q1_7i}
+\end{figure}
+
+\begin{figure}[!htpb]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/q1_7j}
+  \caption{}
+  \label{fig:q1_7j}
+\end{figure}
+
+The figures \ref{fig:q1_7i} and \ref{fig:q1_7j} shows what happens when $|\Sigma|$ is nearly singular, this causes the longer burn-in. The autocorrelation converges slower towards zero. The effective number of samples will be problem dependent, because it will dependent on the acceptance distribution. If the acceptance distribution is close to singular, this means slower autocorrelation and the need to sample more in order to get effective samples.
 
 \subsection*{Question 1.8}
 
