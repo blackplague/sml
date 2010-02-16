@@ -37,7 +37,7 @@
 %% \def\mydate{\today}
 
 \title{Statistical Methods for Machine Learning \\ Mandatory Project 1}
-\author{Kasper Steenstrup \& Michael Andersen}
+\author{Kasper Steenstrup\\Michael Andersen\\Esben Skaarup}
 \date{\today}
 
 %% \title{\mytitle}
@@ -67,7 +67,7 @@ the gaussian distribution with $\mu = [1.0~ 1.0]$ and $\Sigma = [0.3~
   0.2; 0.2~ 0.2]$. The correct $\mu$ is blue and $\widehat{\mu}$ is
 marked with red. The code can be seen in \ref{text:Code}
 
-\begin{figure}[!ht]
+\begin{figure}[!htpb]
   \centering
   \includegraphics[width=0.6\textwidth]{images/q1_1}
   \caption{100 data points, correct mean with blue and estimated mean red.}
@@ -82,21 +82,21 @@ seen from the drawing, the points are placed really close.
 
 \subsection*{Question 1.3}
 
-\begin{figure}[!ht]
+\begin{figure}[!htpbpb]
   \centering
   \includegraphics[width=0.6\textwidth]{images/q1_3a}
   \caption{a shows $p(x_1)$ and b shows $p(x_2)$ using 11 bins.}
   \label{fig:q1_3a}
 \end{figure}
 
-\begin{figure}[!ht]
+\begin{figure}[!htpb]
   \centering
   \includegraphics[width=0.6\textwidth]{images/q1_3b}
   \caption{a shows $p(x_1)$ and b shows $p(x_2)$ using 5 bins.}
   \label{fig:q1_3b}
 \end{figure}
 
-\begin{figure}[!ht]
+\begin{figure}[!htpb]
   \centering
   \includegraphics[width=0.6\textwidth]{images/q1_3c}
   \caption{a shows $p(x_1)$ and b shows $p(x_2)$ using 25 bins.}
@@ -119,35 +119,35 @@ values in the diagonal. The figures show the same tendency as in question 1.3
 and can be solved by looking at the figures and selecting appropriate bin
 numbers.
 
-\begin{figure}[!ht]
+\begin{figure}[!htpb]
   \centering
   \includegraphics[width=0.6\textwidth]{images/q1_4_100}
   \caption{Shows 3d histogram of 100 datapoints using $10$x$10$ bins}
   \label{fig:q1_4_100}
 \end{figure}
 
-\begin{figure}[!ht]
+\begin{figure}[!htpb]
   \centering
   \includegraphics[width=0.6\textwidth]{images/q1_4_1000}
   \caption{Shows 3d histogram of 1000 datapoints using $10$x$10$ bins}
   \label{fig:q1_4_1000}
 \end{figure}
 
-\begin{figure}[!ht]
+\begin{figure}[!htpb]
   \centering
   \includegraphics[width=0.6\textwidth]{images/q1_4_10000}
   \caption{Shows 3d histogram of 10000 datapoints using $10$x$10$ bins}
   \label{fig:q1_4_10000}
 \end{figure}
 
-\begin{figure}[!ht]
+\begin{figure}[!htpb]
   \centering
   \includegraphics[width=0.6\textwidth]{images/q1_4_10000_b15}
   \caption{Shows 3d histogram of 10000 datapoints using $15$x$15$ bins}
   \label{fig:q1_4_10000_b15}
 \end{figure}
 
-\begin{figure}[!ht]
+\begin{figure}[!htpb]
   \centering
   \includegraphics[width=0.6\textwidth]{images/q1_4_10000_b20}
   \caption{Shows 3d histogram of 10000 datapoints using $20$x$20$ bins}
@@ -163,10 +163,73 @@ numbers.
 %% \label{fig:original}
 %% \end{figure}
 
+
+\subsection*{Question 1.8}
+
+The maximum likelihood estimation of the color yields the value $\mu _{ML} = [0.9556~ 0.2994~ 0.2569]$.
+This seems reasonable for the red vase, as the red value is much larger than the green and blue ones.
+Visualizing the RGB color gives a color very close to the color of the vase.
+
+The covariance matrix is also calculated on the training data:\\
+$$\Sigma _{ML} = \left[
+\begin {array}{ccc}
+0.0082 & 0.0052 & 0.0067\\
+\noalign{\medskip}
+0.0052 & 0.0171 & 0.0199\\
+\noalign{\medskip}
+0.0067 & 0.0199 & 0.0241\\
+\end {array}
+\right]$$
+% [0.0082~ 0.0052~ 0.0067; 0.0052~ 0.0171~ 0.0199; 0.0067~ 0.0199~ 0.0241]
+
+The probability for each pixel is visualized in figure \ref{fig:q1_8}.
+The shape of the vase is clearly depicted, and no pixels outside the vase are visibly colored.
+The lighter colors of the vase are not as accurately identified, especially where the reflections cause the original image to have white parts.
+This is expected, as the light colors are underrepresented in the training data, causing the $\mu _{ML}$ to be far from white.
+
+\begin{figure}[!htpb]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/kande1_probebility.png}
+  \caption{The probability of each pixel being a part of the vase.}
+  \label{fig:q1_8}
+\end{figure}
+
+\subsection*{Question 1.9}
+
+Calculating the average position gives the location $[238~ 303]$ which is visualized by the red cross in figure \ref{fig:q1_9}.
+The location seems to accurately represent the center of the vase.
+
+The spatial covariance is also shown in figure \ref{fig:q1_9}.
+The curves are elongated in the direction of the handle of the vase, which seems reasonable.
+They do, however, seem more elongated than the actual shape of the vase.
+
+\begin{figure}[!htpb]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/kande1.png}
+  \caption{The average of the probability of the pixels. The red cross marks the average, and the green lines are isoprobability curves of the gaussian distribution.}
+  \label{fig:q1_9}
+\end{figure}
+
+\subsection*{Question 1.10}
+
+When running the same code with the other image, the results are less successful, seen in figure \ref{fig:q1_10}.
+The maximum likelyhood color is, correctly, much darker, which causes some of the brownish colors of the background to be identified as vase-colored.
+As pixels with high probability now exist across the entire image, the average and spread are no longer a good indication of the location of the vase.
+
+We can thus conclude that the method, while successful on some images, can not generally identify objects, as the background can interfere.
+
+\begin{figure}[!htpb]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/kande2.png}
+  \caption{The same data as in figure \ref{fig:q1_9}, but with the image "kande2.JPG".}
+  \label{fig:q1_10}
+\end{figure}
+
+
 \newpage
 \subsection*{\label{text:Code}}
 \lstinputlisting{../src/probability_and_parameter_estimation.m}
-
+\lstinputlisting{../src/code/case18.m}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Formal stuff
