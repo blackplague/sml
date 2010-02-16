@@ -19,7 +19,6 @@ hold off
 training_data = RGB (tur(1):tll(1), tll(2):tur(2), :);
 training_data = reshape (training_data, size (training_data, 1) * size (training_data, 2), 3);
 
-RGB = im2double (imread ('./images/kande1.jpg'));
 %RGB now in only one vector
 reshape_data = reshape (RGB, size (RGB, 1) * size (RGB, 2), 3);
 
@@ -50,7 +49,7 @@ end
 
 summ = sum(p);
 new_image = reshape (p,  size (RGB, 1), size (RGB, 2),1);
-%imagesc(-new_image), colormap(gray);
+imagesc(-new_image), colormap(gray);
 
 
 pos = zeros(Z,2);
@@ -76,25 +75,4 @@ for i = 1:size(new_image,1)
     end
 end
 C = C/(sum(p))
-plot_results(RGB,q_hat',C)
-
-%hold on
-%  plot(q_hat(1),q_hat(2));%,'k-','linewidth', 2,'Color', 'green');
-%hold off
-
-%hold on
-%    plot ([tur(2), tll(2), tll(2), tur(2), tur(2)], ...
-%        [tur(1), tur(1), tll(1), tll(1), tur(1)], ...
-%        'Color','red','k-', 'linewidth', 2);
-%hold off
-%q_hat = 1/(pixels)*sum(p*)
-
-%lej med at lave den unden loops
-%size(tmp)
-%size(xmu)
-%xmu.*tmp
-%P = 1/((2*pi^(3/2)*det(coveriancen)^(1/2)))*
-%P = (xmu).*tmp;     dette vil give en matrice hvor de digunale ellemeter i
-%matricen er de værdier vi vil have
-%size(p)
-%new_image = reshape (p,  size (RGB, 1), size (RGB, 2),3);
+%plot_results(RGB,q_hat',C)
