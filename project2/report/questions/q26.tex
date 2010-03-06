@@ -1,0 +1,38 @@
+\subsection*{Question 2.6}
+
+Setting the two equations equal as follows
+\begin{align*}
+p(x_1|\mathcal{C}_k)p(x_2|\mathcal{C}_k)p(\mathcal{C}_k) & = \frac{p(\mathcal{C}_k | x_1)p(\mathcal{C}_k | x_2)}{p(\mathcal{C}_k)} \iff \\
+p(x_1|\mathcal{C}_k)p(x_2|\mathcal{C}_k)p(\mathcal{C}_k)p(\mathcal{C}_k) & = p(\mathcal{C}_k | x_1)p(\mathcal{C}_k | x_2) \iff
+\end{align*}
+
+Using Bayes theorem, we can rewrite
+\[
+p(\mathcal{C}_k | x_i) = \frac{p(x_i | \mathcal{C}_k)p(\mathcal{C}_k)}{p(x_i)}
+\]
+We do this for both factors on the right hand side and obtain
+
+\begin{align*}
+p(x_1|\mathcal{C}_k)p(x_2|\mathcal{C}_k)p(\mathcal{C}_k)p(\mathcal{C}_k) & = p(\mathcal{C}_k | x_1)p(\mathcal{C}_k | x_2) \iff \\
+p(x_1|\mathcal{C}_k)p(x_2|\mathcal{C}_k)p(\mathcal{C}_k)p(\mathcal{C}_k) & = \frac{p(x_1|\mathcal{C}_k)p(\mathcal{C}_k)p(x_2|\mathcal{C}_k)p(\mathcal{C}_k)p(\mathcal{C}_k)}{p(x_1)p(x_2)} \iff \\
+\frac{p(x_1|\mathcal{C}_k)p(x_2|\mathcal{C}_k)p(\mathcal{C}_k)p(\mathcal{C}_k)}{p(x_1|\mathcal{C}_k)p(\mathcal{C}_k)p(x_2|\mathcal{C}_k)p(\mathcal{C}_k)} & = p(x_1)p(x_2)
+\end{align*}
+
+We therefore see that the normalization constant is $p(x_1)p(x_2)$.
+
+This can also be seen by applying Bayes theorem to $p(\mathcal{C}_k|x_1, x_2)$
+\begin{equation*}
+p(\mathcal{C}_k|x_1, x_2) = \frac{p(x_1|\mathcal{C}_k)p(x_2|\mathcal{C}_k)p(\mathcal{C}_k)}{p(x_1)p(x_2)}
+\end{equation*}
+From the above it can be seen that the normalization constant making
+sure that the posterior distribution integrates to one is also
+$p(x_1)p(x_2)$. As noted in the book the marginal distribution
+$p(x_1,x_2)$ do typically not factorize under this model.
+
+The result of running \emph{case26.m} looking at the shared covariance
+the contours are simply mirrored in the decision boundary, which is
+linear. The independent covariance becomes apperent as the contours of
+the densities are formed according to the data the are based
+on. Therefore the blue contours are streched more than the red
+contours. The decision boundary resembles a hyperbola as in question
+2.4.
