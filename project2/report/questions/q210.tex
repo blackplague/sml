@@ -1,6 +1,21 @@
 \subsection*{Question 2.10}
 
-% For making two columns of results
+We are to try out various numbers of hidden units in the neural
+network. From figure \ref{fig:q210hidden} we see that using $260$
+hidden units performs the best on the test data with $27.31\%$
+error. The resulting decision boundaries can be seen in figure
+\ref{fig:q210Nh260}. The boundary is rather complex due to the large
+number of hidden units within the network. As another example figure
+\ref{fig:q210Nh2} shows decision boundaries using only $2$ hidden
+units. This results in a nearly linear boundary, due to the
+inflexibility of using only $2$ hidden units. As opposed to $2$ and
+$260$ hidden units, figure \ref{fig:q210Nh1000} shows the result of
+using $1000$ hidden units. We now have a situation where we have low
+misclassification rate on the training data scoring $22.00\%$ error,
+but the model do not generalize very well resulting in $29.12\%$ on
+the test data. From the figure it can be seen that the model tends
+towards overfitting, by having more curvatures.
+
 \begin{figure}[!htbp]
   \centering
   \subfloat[\label{subfig:q210Nh10}]{
@@ -97,18 +112,26 @@
   \label{fig:q210hidden}
 \end{figure}
 
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=1.0\textwidth]{./images/q210a_Nh2}
+  \caption{}
+  \label{fig:q210Nh2}
+\end{figure}
 
-% First result
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=1.0\textwidth]{./images/q210a_Nh260}
+  \caption{}
+  \label{fig:q210Nh260}
+\end{figure}
 
-%
-
-
-%
-
-
-
-
-
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=1.0\textwidth]{./images/q210a_Nh1000}
+  \caption{}
+  \label{fig:q210Nh1000}
+\end{figure}
 
 In figure \ref{fig:q1_1} can be seen the $100$ data points drawn from
 the gaussian distribution with $\mu = [1.0~ 1.0]$ and $\Sigma = [0.3~
