@@ -14,7 +14,7 @@ using $1000$ hidden units. We now have a situation where we have low
 misclassification rate on the training data scoring $22.00\%$ error,
 but the model do not generalize very well resulting in $29.12\%$ on
 the test data. From the figure it can be seen that the model tends
-towards overfitting, by having more curvatures.
+towards over-fitting, by having more curvatures.
 
 \begin{figure}[!htbp]
   \centering
@@ -125,7 +125,7 @@ towards overfitting, by having more curvatures.
   \centering
   \includegraphics[width=0.6\textwidth]{./images/q210a_Nh260}
   \caption{Show neural network using $260$ hidden units, resulting in
-    a rather complex decision boundary, but not overfitted.}
+    a rather complex decision boundary, but not over-fitted.}
   \label{fig:q210Nh260}
 \end{figure}
 
@@ -134,7 +134,7 @@ towards overfitting, by having more curvatures.
   \includegraphics[width=0.6\textwidth]{./images/q210a_Nh1000}
   \caption{Show neural network using $1000$ hidden units, resulting in
     a complex decision boundary with many curvatures, this seems too
-    overfitted for the data.}
+    over-fitted for the data.}
   \label{fig:q210Nh1000}
 \end{figure}
 
@@ -142,18 +142,18 @@ Our results suggests that using a neural network model with
 intermediate complexity results in the best generalization. Choosing
 $260$ hidden units performs the best.
 
-We are now to experiment with using regulization to control the
+We are now to experiment with using regularization to control the
 complexity of the model using a fixed number of hidden units. The
 result of the experiments can be seen in figure
 \ref{fig:q210bregulization}. The figure \ref{fig:q210breg2} show the
-plot of \ref{subfig:q210btrain}, the result suffers from overfitting
+plot of \ref{subfig:q210btrain}, the result suffers from over-fitting
 it produces the lowest training error, but the test error suffer from
-the lack of generalization. Using $0.025119$ as regulization
+the lack of generalization. Using $0.025119$ as regularization
 coefficient produces the most general model, this produces a near
 linear decision boundary which can be seen in \ref{fig:q210breg3}. A
 to simple model is shown in figure \ref{fig:q210breg5}, this is using
-$6.309573$ as regulization coefficient, this results in a total linear
-model due to the regulization of the weight parameters in the model. A
+$6.309573$ as regularization coefficient, this results in a total linear
+model due to the regularization of the weight parameters in the model. A
 graph of the error values can be seen in figure \ref{fig:q210berror}
 bottom.
 
@@ -162,7 +162,7 @@ bottom.
   \subfloat[\label{subfig:q210btrain}]{
     \begin{tabular}{|c|c|}
       \hline
-      \multicolumn{2}{|c|}{Regulization coefficient $= 0.001585$} \\
+      \multicolumn{2}{|c|}{Regularization coefficient $= 0.001585$} \\
       \hline
       Training error: \textbf{26.00\%} & Test error: 29.38\% \\
       \hline
@@ -171,7 +171,7 @@ bottom.
   \subfloat[\label{subfig:q210btest}]{
   \begin{tabular}{|c|c|}
     \hline
-      \multicolumn{2}{|c|}{Regulization coefficient $= 0.025119$} \\
+      \multicolumn{2}{|c|}{Regularization coefficient $= 0.025119$} \\
       \hline
       Training error: 27.00\% & Test error: \textbf{28.25\%} \\
       \hline
@@ -185,23 +185,23 @@ bottom.
 \begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.6\textwidth]{./images/q210b_reg2}
-  \caption{Show neural network using regulization coefficient at $0.001585$, resulting in
-    a complex decision boundary, this seems to tends towards overfitted.}
+  \caption{Show neural network using regularization coefficient at $0.001585$, resulting in
+    a complex decision boundary, this seems to tends towards over-fitted.}
   \label{fig:q210breg2}
 \end{figure}
 
 \begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.6\textwidth]{./images/q210b_reg3}
-  \caption{Show neural network using regulization coefficient at $0.025119$, resulting in
-    a simple near linear decision boundary, not overfitted.}
+  \caption{Show neural network using regularization coefficient at $0.025119$, resulting in
+    a simple near linear decision boundary, not over-fitted.}
   \label{fig:q210breg3}
 \end{figure}
 
 \begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.6\textwidth]{./images/q210b_reg5}
-  \caption{Show neural network using regulization coefficient at $6.309573$, resulting in
+  \caption{Show neural network using regularization coefficient at $6.309573$, resulting in
     a linear decision boundary.}
   \label{fig:q210breg5}
 \end{figure}
@@ -210,7 +210,7 @@ bottom.
   \centering
   \includegraphics[width=0.8\textwidth]{./images/q210b_error}
   \caption{Shows error of training and test data in relation to the
-    regulization coefficient. Also shows the regulized cost function
-    in relation to the regulization coefficient.}
+    regularization coefficient. Also shows the regularized cost function
+    in relation to the regularization coefficient.}
   \label{fig:q210berror}
 \end{figure}
