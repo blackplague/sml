@@ -12,7 +12,7 @@ intermediate number of bins.
 \begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.85\textwidth]{./images/q37histograms}
-  \caption{Shows various histograms.}
+  \caption{Shows histogram with various selections of bin numbers.}
   \label{fig:q37histograms}
 \end{figure}
 
@@ -33,31 +33,90 @@ starts to become one.
 \begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.85\textwidth]{./images/q37kde}
-  \caption{Shows kernel density estimation for various selections of bandwidth.}
+  \caption{Shows kernel density estimation for various selections of
+    bandwidth.}
   \label{fig:q37kde}
 \end{figure}
 
 \begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.6\textwidth]{./images/q37kdeauto}
-  \caption{Shows kernel density estimation with automatic bandwidth selection.}
+  \caption{Shows kernel density estimation with automatic bandwidth
+    selection.}
   \label{fig:q37kdeauto}
 \end{figure}
 
+\newpage
 
+We are now to visualize $2d$ kernel density estimation based on the
+first and second principal component. This is shown in figure
+\ref{fig:q373dkde1} and \ref{fig:q373dkde2}. The figures shows the
+same trends as the previously mentioned. Selecting the kernel
+bandwidth too large causes the distribution to become too smooth,
+thereby loosing the ability to captures the real form of the
+distribution. Choosing the kernel bandwidth too small makes the
+estimated distribution too spiky and noisy. So one has too choose some
+intermediate. One this has to be noted, currently we select the same
+bandwidth along both principal component. Better result can be
+obtained by selecting individual bandwidth along the two different
+axis.
 
 \begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.6\textwidth]{./images/q373dkde1}
-  \caption{Shows 2d kernel density estimations for various selections of bandwidth.}
+  \includegraphics[width=1.0\textwidth]{./images/q373dkde1}
+  \caption{Shows 2d kernel density estimations for various selections
+    of bandwidth.}
   \label{fig:q373dkde1}
 \end{figure}
 
-
 \begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.6\textwidth]{./images/q373dkde2}
-  \caption{Shows 2d kernel density estimations for various selections of bandwidth.}
+  \includegraphics[width=1.0\textwidth]{./images/q373dkde2}
+  \caption{Shows 2d kernel density estimations for various selections
+    of bandwidth.}
   \label{fig:q373dkde2}
 \end{figure}
 
+\newpage
+
+We are now to try out making density estimation using guassian mixture
+model with various number of components. This is shown in figure
+\ref{fig:q37mog}. When using two components, we are only able to
+capture two of the modes within the two principal components. Using
+three the result looks very reasonable, and this is our best guess at
+what to use. Using four components, we starts to get $\delta$-spikes
+where the component collapses onto a data point. This can be seen
+around pc1 $= 0.2$ and pc2 $= 0.0$. The problem is even more visible
+when using five components. We see that the 'top' of the density is
+now around $60$ as opposed to $25$ when using three components.
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.95\textwidth]{./images/q37mog}
+  \caption{Shows mixtures of gaussians for various selections of
+    components in the model.}
+  \label{fig:q37mog}
+\end{figure}
+
+It is unfortunately not possible to run \emph{gmdistribution.fit}
+without specifying the number of components one wants to use within
+the model. So it cannot be configured to automatic figure out what
+number of components to use. We can instead try to use Akaike
+Information Criterion for the estimated models, this idea is good
+enough in theory. But as it turns out, it will always favor the one
+with the largest number of components, even though this will be
+severely over-fitted. As it turn out, is we let it run through
+$1$--$11$ components, it will select $11$ and this is with the AIC
+value: $-237.657405$, this is based on minimizing a negative log
+likelihood function (More information can be found by searching for
+\emph{aic} within the Matlab help system). A figure of the 'best'
+number of components can be seen in figure \ref{fig:q37mogbest}, it is
+very apperent that the model has collapsed onto a data points as it
+peaks around $500$.
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.95\textwidth]{./images/q37mogbest}
+  \caption{Shows the 'best' mixtures of gaussians model.}
+  \label{fig:q37mogbest}
+\end{figure}
