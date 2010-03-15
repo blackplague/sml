@@ -40,7 +40,7 @@ starts to become one.
 
 \begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.6\textwidth]{./images/q37kdeauto}
+  \includegraphics[width=0.65\textwidth]{./images/q37kdeauto}
   \caption{Shows kernel density estimation with automatic bandwidth
     selection.}
   \label{fig:q37kdeauto}
@@ -112,7 +112,9 @@ likelihood function (More information can be found by searching for
 \emph{aic} within the Matlab help system). A figure of the 'best'
 number of components can be seen in figure \ref{fig:q37mogbest}, it is
 very apperent that the model has collapsed onto a data points as it
-peaks around $500$.
+peaks around $500$. And when selecting more that $11$ components the
+programs breaks down with the following error: \emph{Ill-conditioned
+  covariance error occurred in every replicate.}
 
 \begin{figure}[!htbp]
   \centering
