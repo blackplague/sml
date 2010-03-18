@@ -1,5 +1,5 @@
 \subsection*{Question 3.3}
-In this question we are using this 2 equation.
+In this question we are using these 2 equations:
 
 \begin{equation}
 	u = \frac{1}{\sqrt{\lambda_1}}k^T_1(s-\mu)
@@ -9,25 +9,23 @@ In this question we are using this 2 equation.
 	v = \frac{1}{\sqrt{\lambda_1}}k^T_1(s-\mu)
 \end{equation}
 
-Where $k_1$ and $k_2$ is the eigenvector for the to best eigenvalue. we use the original data from the hands to find there difference from this 2 hands. and plot are scatter plot over then difference, see figure \ref{fig:q33scatter}, where 0 in the x and y axes, is the best possible solution. It can also be seen that the difference hands in laying pretty close on the y axe, 
+$k_1$ and $k_2$ are the eigenvectors for the two best eigenvalues. We make a scatter plot over the differences as indicated by the two eigenvectors (see figure \ref{fig:q33scatter}), where values of 0 in the x and y axes is the solution closest to the mean hand. It can also be seen that most of the hands lay pretty close to the x axis.
 
 \begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.85\textwidth]{./images/q33_scatter}
-  \caption{Shows a scatter plot over the difference  plot over the first hand in the data set.}
+  \caption{A scatter plot of the hands variation as indicated by the eigenvectors of the two largest eigenvalues.}
   \label{fig:q33scatter}
 \end{figure}
 
-Both to point are laying long away, and sine we are calculating whit are quadratic formeler. This point where get are heigh distend. The 5 longest distends is give as $d = [10.3647, 9.9394,5.3812, 4.8844, 4.7395]$, and it is clerelig that the 2 heighest distends are ca. twice as big as the otters.
-This to hands is desplete in figure \ref{fig:q33}, and it can be seen that there are big difference in them.
+Measuring the distance from the center, we see that the 5 largest distances are $d = [3.2194, 3.1527, 2.3197, 2.2101, 2.1770]$.
+Notice that two of these have significantly larger values than the following.
+Looking at the plot, we also notice that two points are significantly futher from the others.
+The hands corresponding to these points are seen in figure \ref{fig:q33}, where we can see that they are, indeed, differing from the mean hand.
 
 \begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.85\textwidth]{./images/q33}
-  \caption{To hands where the worst fit is the green hand and the scekkent worst is the red hand.}
+  \caption{The two hands that are the worst fits to the mean hand. Distance-wise, the the green hand is the worst, and the red is the second worst.}
   \label{fig:q33}
 \end{figure}
-
-
-
-
