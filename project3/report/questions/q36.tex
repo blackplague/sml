@@ -1,7 +1,7 @@
 \subsection*{Question 3.6}
 
 Plotting the cancer groups according to the first two principal
-components can be seen in figure \ref{fig:q34pcs2}. Some of the cancer
+components can be seen in figure \ref{fig:q36pcs2}. Some of the cancer
 groups seems to cluster nicely, especially \emph{MEL}, \emph{COL} and
 \emph{LEU}. To some degree \emph{REN} also clusters nicely, but it
 gets intermixed with some of the other cancer groups. \emph{BRE} looks
@@ -9,25 +9,25 @@ like it is spread all over, appearing both in \emph{MEL}, \emph{COL}
 and the \emph{REN} cluster. This is using $k = 9$
 
 \begin{figure}[!htbp]
-  \centering \includegraphics[width=0.95\textwidth]{./images/q34pcs2}
+  \centering \includegraphics[width=0.95\textwidth]{./images/q36pcs2}
   \caption{2d plot according to pc$1$ and pc$2$ using k-means for
     coloring.}
-  \label{fig:q34pcs2}
+  \label{fig:q36pcs2}
 \end{figure}
 
 \newpage
 
-In figure \ref{fig:q34pcs3} can be seen using $k = 6$, the trend from
-figure \ref{fig:q34pcs2} continues. \emph{NSC}, \emph{CNS}, \emph{OVA}
+In figure \ref{fig:q36pcs3} can be seen using $k = 6$, the trend from
+figure \ref{fig:q36pcs2} continues. \emph{NSC}, \emph{CNS}, \emph{OVA}
 and \emph{BRE} seems intermixed in one big pile around pc$1$ $= -0.1$
 and pc$2$ $= -0.05$. While the nicely clustered cancer groups from
-figure \ref{fig:q34pcs2} again clusters nicely.
+figure \ref{fig:q36pcs2} again clusters nicely.
 
 \begin{figure}[!htbp]
-  \centering \includegraphics[width=0.95\textwidth]{./images/q34pcs3}
+  \centering \includegraphics[width=0.95\textwidth]{./images/q36pcs3}
   \caption{2d plot according to pc$1$ and pc$2$ using k-means for
     coloring.}
-  \label{fig:q34pcs3}
+  \label{fig:q36pcs3}
 \end{figure}
 
 \newpage
@@ -40,13 +40,19 @@ three first principal components we would have been able to make a
 better seperation of the cancer groups.
 
 \begin{figure}[!htbp]
-  \centering \includegraphics[width=0.95\textwidth]{./images/q34pcs4}
+  \centering \includegraphics[width=0.95\textwidth]{./images/q36pcs4}
   \caption{3d plot according to pc$1$, pc$2$ and pc$3$ using k-means
     for coloring.}
-  \label{fig:q34pcs4}
+  \label{fig:q36pcs4}
 \end{figure}
 
 From the above it seems like \emph{BRE} and \emph{NSC} are rather
 heterogenous with its variance originating from other sources. And
 with \emph{PRO} being homogenous with \emph{OVA}. Some of \emph{NSC}
 (three cancer types) are also very much like \emph{OVA}.
+
+We have tried varying the number of \emph{k} over the range $2$--$10$,
+but the most optimal choise of \emph{k} seems to be somewhere around
+$6$ or $7$. Too low and we do not get enough separation between the
+different cancer group. Using too high a \emph{k} and we start
+seperating similar cancer types
