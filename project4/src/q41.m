@@ -4,10 +4,17 @@ function q41( ~ )
 
     function [RMSE w_ml] = q41train( path )
 
+        addpath('./hfunc/')
+        
         [uf, rv, ~] = getuserinfo( path );
         
-        phifn=@(x)[1 x];
+%         normage = normalizedata(uf(:,3));
+%         normtime = normalizedata(uf(:,8));
         
+        phifn=@(x)[1 x];
+
+%         Phi1 = generate_designmatrix([ normage uf(:,4:end-1) normtime], phifn);
+%         Phi1 = generate_designmatrix([ normage uf(:,4:end)], phifn);
         Phi1 = generate_designmatrix(uf(:,3:end), phifn);
         
         w_ml = inv(Phi1'*Phi1)*Phi1'*rv;
@@ -31,23 +38,29 @@ function q41( ~ )
         
     end
 
-    function [RMSE] = q41testmean(mean_vector, path)
-
-        [~, ~, rm] = getuserinfo( path );        
+    function [RMSE] = q41testmean(mean_vector, rm)
         
         mean_matrix = repmat(mean_vector,size(rm,1),1);
+        
         indx = rm>0;
         Ntr = sum(sum(indx));
         
         RMSE = sqrt(sum(sum(((indx .* rm) - (indx .* mean_matrix)).^2))/Ntr);
     end
 
-    function [mean_vector] = q41meanpred( path)
-       
-        mean_vector = meannonzero( path );
+    function normalizedvector = normalizedata( vector )
+    %normalizedata recieves a vector of data and return a normalized vector
+    %by performing the following normalization data((i) - mean(data)) /
+    %std(data) (Whitening of the data).
         
+        meanofdata = mean(vector);
+        stdofdata = std(vector);
+        
+        normalizedvector = ...
+            (vector - repmat(meanofdata,size(vector,2),1)) * (1/stdofdata);
+    
     end
-
+        
     function run()
         
         RMSEtrain = zeros(5,1);
@@ -96,15 +109,21 @@ function q41( ~ )
         end
         fprintf('\n')
         
+        mean_vec = zeros(5,1682);
+        RMSE_mean = zeros(5,1);
+        for i=1:5
+            [~, ~, rm_train] = getuserinfo( ['u' num2str(i) '.base'] );
+            [~, ~, rm_test ] = getuserinfo( ['u' num2str(i) '.test'] );
+            
+            mean_vec(i,:) = meannonzero( rm_train );
+            RMSE_mean(i) = q41testmean(mean_vec(i,:), rm_test);
+        end
         
-    path = 'u.data';
+        for i=1:length(RMSE_mean)
+            fprintf('RMSE%d based on average movie rating: %2.10f\n', i, RMSE_mean(i))
+        end
         
-    mean_vec = q41meanpred( path );
-    
-    RMSE = q41testmean(mean_vec, path);
-    
-    fprintf('RMSE based on average movie rating: %d', RMSE)
-    
+        fprintf('Mean RMSE: %2.10f\n', mean(RMSE_mean))
     end
 run();
 end
