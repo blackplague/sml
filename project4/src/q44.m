@@ -233,6 +233,7 @@ function [ output_args ] = q44( Comment )
         addpath('hfunc/')
         
         path = 'u.data';
+        texton = 'true';
         
         Y = X - repmat( mean( X ), size( X, 1 ), 1 );
         
@@ -243,8 +244,12 @@ function [ output_args ] = q44( Comment )
         
         movie_id = movie{1,1};
         movie_title = movie{1,2};
+        movie_genre = movie{1,7};
         
-        m_vec = meannonzero( path );
+        % Mean vector 1 x 1682, contains mean rating for each movie.
+        m_vec = meannonzero( ratings );
+        % Rating vector 1 x 1682, contains how many have rated a movie.
+        r_vec = numberofratings( ratings );
         
         bad   = m_vec < 1.5;
         poor  = 1.5 < m_vec & m_vec < 2.5;
@@ -259,23 +264,8 @@ function [ output_args ] = q44( Comment )
         fprintf('Number of super movies: %d\n', length(find(super)))        
         
         % Plotting users according to sexes.
-%         fig1 = figure(21);
-%         hold on
-%         plot( X(bad,:)*V(:,1), X(bad,:)*V(:,2), 'k.', 'MarkerSize', 6, 'LineWidth', 3  )
-%         plot( X(poor,:)*V(:,1), X(poor,:)*V(:,2), 'r.', 'MarkerSize', 6, 'LineWidth', 3  )
-%         plot( X(mid,:)*V(:,1), X(mid,:)*V(:,2), 'b.', 'MarkerSize', 6, 'LineWidth', 3  )
-%         plot( X(good,:)*V(:,1), X(good,:)*V(:,2), 'm.', 'MarkerSize', 6, 'LineWidth', 3  )
-%         plot( X(super,:)*V(:,1), X(super,:)*V(:,2), 'c.', 'MarkerSize', 6, 'LineWidth', 3  )
-% %         legend('Female', 'Male')
-%         title('Based movie*V')
-%         xlabel( 'pc1' )
-%         ylabel( 'pc2' )        
-%         hold off
-% %         hold on
-% %         text( V(:,1), V(:,2) + 0.01, cancer_factor, 'FontSize', 8 )
-% %         hold off
 
-        figure(23)
+        fig23 = figure(23);
         hold on
         plot( U(bad,1), U(bad,2), 'k.', 'MarkerSize', 6, 'LineWidth', 3  )
         plot( U(poor,1), U(poor,2), 'r.', 'MarkerSize', 6, 'LineWidth', 3  )
@@ -283,30 +273,43 @@ function [ output_args ] = q44( Comment )
         plot( U(good,1), U(good,2), 'm.', 'MarkerSize', 6, 'LineWidth', 3  )
         plot( U(super,1), U(super,2), 'c.', 'MarkerSize', 6, 'LineWidth', 3  )
         title('U')
-        legend('Bad', 'Poor', 'Mid', 'Good', 'Super')       
+        legend('Bad - Mean < 1.5', 'Poor - 1.5 < Mean < 2.5', ...
+            'Mid - 2.5 < Mean < 3.5', 'Good - 3.5 < Mean < 4.5', ...
+            'Super - 4.5 < Mean')       
         xlabel( 'pc1' )
         ylabel( 'pc2' )        
         hold off
+        saveas(fig23, ['../report/images/q45_' num2str(23)], 'epsc')
         
-        figure(24)
+        fig24 = figure(24);
         hold on
-        plot( U(super,1), U(super,2), 'c.', 'MarkerSize', 6, 'LineWidth', 3  )
+        plot( U(super,1), U(super,2), 'r.', 'MarkerSize', 6, 'LineWidth', 3  )
         title('Top rated - Movies with a rating > 4.5')
-        text( U(super,1), U(super,2) + 0.001, movie_title(super), 'FontSize', 8 )
+        if(strcmp(texton, 'true'))
+            text( U(super,1), U(super,2) + 0.001, movie_title(super), 'FontSize', 6 )
+            text( U(super,1), U(super,2) + 0.002, movie_genre(super), 'FontSize', 6 )
+            text( U(super,1), U(super,2) + 0.003, r_vec(super), 'FontSize', 6 )
+        end
         xlabel( 'pc1' )
         ylabel( 'pc2' )        
         hold off
+        saveas(fig24, ['../report/images/q45_' num2str(24)], 'epsc')
 
-        nearest_indx = findnearest(10, 50, U(:,1), U(:,2));
+        starwars = 50;
+        nearest_indx = findnearest(10, starwars, U(:,1), U(:,2));
 
         figure(25)
         hold on
         plot( U(:,1), U(:,2), 'b.', 'MarkerSize', 6, 'LineWidth', 3  )
-        plot( U(50,1), U(50,2), 'ro', 'MarkerSize', 6, 'MarkerFaceColor', 'r'  )
+        plot( U(starwars,1), U(starwars,2), 'ro', 'MarkerSize', 6, 'MarkerFaceColor', 'r'  )
         plot( U(nearest_indx,1), U(nearest_indx,2), 'mo', 'MarkerSize', 4, 'MarkerFaceColor', 'm'  )
-        title('10 Movie nearest to Starwars (1977)')
-        text( U(nearest_indx,1), U(nearest_indx,2) + 0.001, movie_title(nearest_indx), 'FontSize', 8 )
-        text( U(50,1), U(50,2) + 0.001, movie_title(50), 'FontSize', 8 )
+        title('10 Movies nearest to Starwars (1977)')
+        if(strcmp(texton, 'true'))
+            text( U(nearest_indx,1), U(nearest_indx,2) + 0.001, movie_title(nearest_indx), 'FontSize', 8 )
+            text( U(nearest_indx,1), U(nearest_indx,2) + 0.0016, movie_genre(nearest_indx), 'FontSize', 6 )
+            text( U(starwars,1), U(starwars,2) + 0.001, movie_title(starwars), 'FontSize', 8 )
+            text( U(starwars,1), U(starwars,2) + 0.0016, movie_genre(starwars), 'FontSize', 6 )
+        end
         xlabel( 'pc1' )
         ylabel( 'pc2' )        
         hold off        

@@ -1,8 +1,8 @@
-function q42( input_args )
+function p = q42( input_args )
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
     
-    function [m1 m2 C1 C2 train_err] = q42trainclass( path )
+    function [m1 m2 C1 C2 prior1 train_err p] = q42trainclass( path )
         
         % As we consider a two-class problem we need to model the
         % probabilistic density 
@@ -13,25 +13,35 @@ function q42( input_args )
         [ userfeatures rv ] = getuserinfo( path );
         [uf dr] = discretize( userfeatures, rv );
 
-        m1 = mean(uf((dr == 1), 3:end));
-        m2 = mean(uf((dr == 2), 3:end));
+        class1_indx = find(dr == 1);
+        class2_indx = find(dr == 2);
         
-        C1 = cov(uf((dr == 1), 3:end));
-        C2 = cov(uf((dr == 2), 3:end));
+        N1 = length(find(dr == 1));
+        N2 = length(find(dr == 2));
+        N = N1+N2;
+        
+        m1 = mean(uf((class1_indx), 3:end));
+        m2 = mean(uf((class2_indx), 3:end));
+        
+        C1 = cov(uf((class1_indx), 3:end));
+        C2 = cov(uf((class2_indx), 3:end));
+        
+        prior1 = N1/N;
+        prior2 = 1 - prior1;
         
         p = zeros(length(dr), 1);
         
-        % Calculate non-normalized probability of the two classes given
-        % data
+        % Calculate probability of the two classes given data
+        % Using logsig to transform to probability logsig(n) -> 1/(1+exp(-n))
         for i = 1:length(dr)
-                p(i,1) = mvnpdf( uf(i,3:end), m1, C1 );
-                p(i,2) = mvnpdf( uf(i,3:end), m2, C2 );
+                p(i,1) = logsig(mvnpdf( uf(i,3:end), m1, C1 )*prior1);
+                p(i,2) = logsig(mvnpdf( uf(i,3:end), m2, C2 )*prior2);
         end
        
         % The hacked way of getting the normalization coefficient for the
         % distributions.
-        normcoeff1 = sum(p(:,1)); normcoeff2 = sum(p(:,2));
-        p(:,1) = p(:,1)/normcoeff1; p(:,2) = p(:,2)/normcoeff2;
+%         normcoeff1 = sum(p(:,1)); normcoeff2 = sum(p(:,2));
+%         p(:,1) = p(:,1)/normcoeff1; p(:,2) = p(:,2)/normcoeff2;
         
         pdr = predicteddiscreterating(p);
         
@@ -64,22 +74,25 @@ function q42( input_args )
         end
     end
 
-    function test_err = classifier(m1, m2, C1, C2, path, Theta)
+    function test_err = classifier(m1, m2, C1, C2, prior, path, Theta)
         
         [ userfeatures rv ] = getuserinfo( path );        
         [uf dr] = discretize( userfeatures, rv );
                 
+        prior1 = prior;
+        prior2 = 1 - prior;
+        
         p = zeros(length(dr), 2);
         
         for i = 1:length(dr)
-                p(i,1) = mvnpdf( uf(i,3:end), m1, C1 );
-                p(i,2) = mvnpdf( uf(i,3:end), m2, C2 );
+                p(i,1) = logsig(mvnpdf( uf(i,3:end), m1, C1 )*prior1);
+                p(i,2) = logsig(mvnpdf( uf(i,3:end), m2, C2 )*prior2);
         end
 
         % The hacked way of getting the normalization coefficient for the
         % distributions.
-        normcoeff1 = sum(p(:,1)); normcoeff2 = sum(p(:,2));
-        p(:,1) = p(:,1)/normcoeff1; p(:,2) = p(:,2)/normcoeff2;
+%         normcoeff1 = sum(p(:,1)); normcoeff2 = sum(p(:,2));
+%         p(:,1) = p(:,1)/normcoeff1; p(:,2) = p(:,2)/normcoeff2;
         
         pdr = predicteddiscreterating(p);
         
@@ -112,15 +125,15 @@ function q42( input_args )
         
     end
 
-    function run()
+    function p = run()
         
         % Return vector for values from the train classifier function
         % ret_vec_tr <==> [m1 m2 C1 C2 tr_err]
         m1 = zeros(5,24); m2 = zeros(5,24); C1 = cell(5,1); C2 = cell(5,1);
-        tr_err = zeros(5,1);
+        tr_err = zeros(5,1); prior = zeros(5,1);
         
         for i=1:size(tr_err,1)
-            [m1(i,:) m2(i,:) C1{i} C2{i} tr_err(i)] = q42trainclass(['u' num2str(i) '.base']);
+            [m1(i,:) m2(i,:) C1{i} C2{i} prior(i) tr_err(i) p] = q42trainclass(['u' num2str(i) '.base']);
             fprintf('Done training %d ', i)
         end
 
@@ -133,7 +146,7 @@ function q42( input_args )
         
         for i=1:size(te_err,1)
             te_err(i) = classifier(m1(i,:), m2(i,:), C1{i}, C2{i}, ...
-                ['u' num2str(i) '.test']);
+                prior(i), ['u' num2str(i) '.test']);
             fprintf('Done classifying %d ', i)
         end
         
@@ -144,5 +157,5 @@ function q42( input_args )
         end        
         
     end
-    run();
+    p = run();
 end
