@@ -19,6 +19,5 @@ function [ gender_indx ] = getGenderIndex( gender_string, user, path )
         case {'female'}
             gender_indx = user_sex == 1;
     end
-
 end
 
