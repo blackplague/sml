@@ -1,0 +1,145 @@
+\subsection*{Question 4.1}
+
+We are to investigate how well we can predict ratings using regression
+on features approach, which looks like the following:
+\begin{equation*}
+r_{mn} = y(\mathbf{w}, \mathbf{x}_{nm}) + \epsilon_{nm}
+\end{equation*}
+
+We are to select a number of features and base our model on this, the features I have selected can be seen in figure \ref{fig:q41features}.
+
+\begin{figure}[!htbp]
+\centering
+\begin{tabular}{r|r}
+Feature & Description \\
+\hline
+user\_age & User age \\
+user\_gender & User gender \\
+user\_zipcode & User zipcode \\
+user\_occupation & User occupation \\
+movie\_genre & Movie genre \\
+timestamp & Time of the movie rating
+\end{tabular}
+\caption{Selected features from users and movies}
+\label{fig:q41features}
+\end{figure}
+
+The following reasons apply to selecting the different features.
+\begin{itemize}
+\item User age is selected because it is very like that users of
+  different age have different taste and therefore rate the movies in
+  some pattern based on their age.
+\item User gender is selected because males and females tends to have
+  somewhats different tastes in movies.
+\item User zipcode it is possible that users living in the same area
+  will be likely to favor the same type of movies, though it is pretty
+  unlikely, but I have chosen to include it anyhow.
+\item User occupation could be linked to the occupation of the
+  user. For example it is likely that programmer and technicians rate
+  movies similarily and rather different from librarians and such.
+\item Movie genre is selected because users tends to have a specific
+  taste in movie genre, and therefore users with similar features
+  might have a tendency to favor the same movie genre and thereby rate
+  them in a similar manner.
+\item Timestamp I have no real argument for selecting timestamp, it is
+  very unlikely that the time of rating has anything to do with the
+  rating of a given movie.
+\end{itemize}
+
+I have used a simple linear basis function model of the form seen in Bishops p. 138 eq. 3.3
+\begin{equation*}
+y(\mathbf{x},\mathbf{w}) = \sum_{j=0}^{M-1} w_{j}\phi_{j}(\mathbf{x}) = \mathbf{w}^{T}\boldsymbol{\phi}(\mathbf{x})
+\end{equation*}
+
+I have chosen to use the identity function as basis function $\phi(x)
+= x$. Using this I have obtain the results seen in table
+\ref{tab:q41RMSEtr}--\ref{tab:q41RMSEte}.
+
+\begin{table}[!htbp]
+  \begin{minipage}[b]{0.5\linewidth}
+    \centering
+    \begin{tabular}{c|c}
+      Training set & RMSE \\
+      \hline
+      1 & 1.100913 \\
+      2 & 1.105745 \\
+      3 & 1.110072 \\
+      4 & 1.110102 \\
+      5 & 1.109029 \\
+      \hline
+      Mean & 1.107172 \\
+    \end{tabular}
+    \caption{RMSE on training sets.}
+    \label{tab:q41RMSEtr}
+  \end{minipage}
+  \hspace{0.5cm}
+  \begin{minipage}[b]{0.5\linewidth}
+    \centering
+    \begin{tabular}{c|c}
+      Test set & RMSE \\
+      \hline
+      1 & 1.132595 \\
+      2 & 1.113342 \\
+      3 & 1.096032 \\
+      4 & 1.095797 \\
+      5 & 1.100197 \\
+      \hline
+      Mean & 1.107593 \\
+    \end{tabular}
+    \caption{RMSE on test sets.}
+    \label{tab:q41RMSEte}
+  \end{minipage}
+\end{table}
+
+When training the five different model we obtain five different sets
+of $\mathbf{w}_{ML}$, I have then chosen also to try and mean the five
+returned weights and rerunning against all the test sets. Using this
+method I obtain the results reported in table
+\ref{tab:q41meanwml}. Using simple mean of each rated movies I obtain
+the results in table \ref{tab:q41meanrated}
+
+\begin{table}[!htbp]
+  \begin{minipage}[b]{0.5\linewidth}
+    \centering
+    \begin{tabular}{c|c}
+      Test set & RMSE \\
+      \hline
+      1 & 1.131796 \\
+      2 & 1.112976 \\
+      3 & 1.095571 \\
+      4 & 1.095538 \\
+      5 & 1.099822 \\
+      \hline
+      Mean & 1.107141 \\
+    \end{tabular}
+    \caption{RMSE on test sets using the mean of the five $\mathbf{w}_{ML}$.}
+    \label{tab:q41meanwml}
+  \end{minipage}
+  \hspace{0.5cm}
+  \begin{minipage}[b]{0.5\linewidth}
+    \centering
+    \begin{tabular}{c|c}
+      Test set & RMSE \\
+      \hline
+      1 & 1.036062 \\
+      2 & 1.031429 \\
+      3 & 1.024231 \\
+      4 & 1.019363 \\
+      5 & 1.028093 \\
+      \hline
+      Mean & 1.027836 \\
+    \end{tabular}
+    \caption{RMSE on test sets using mean of each rated movie within training set.}
+    \label{tab:q41meanrated}
+  \end{minipage}
+\end{table}
+
+As it can be seen from table \ref{tab:q41meanwml} the RMSE obtained is
+lower than the mean the five individual model, this also correspons
+with the intuitions, the more data one uses to train the model the
+more accurate it becomes. From table \ref{tab:q41meanrated} it can be
+seen that simple using the mean value of each rated movie obtains
+better results than the simple linear model. I have chosen to set
+movies with no rating to $0$, and improvement would probably be to set
+all unrated movies to the mean value of all rated movies. But this
+have not been tested.

@@ -1,0 +1,49 @@
+\subsection*{Question 4.10}
+
+We are to use the power method for solving the PageRank problem, and
+plot the squared difference in the PageRank vector opposed to the true
+vector calculated in question 4.9. The number of iterations required
+to obtain a squared difference is $42$, this can also be seen from
+figure \ref{fig:q410unid_85}. When initializing either the highest
+scoring PageRank or lowest scoring convergence is obtained using $50$
+iteration which is worse than using the uniform approach. Better
+performance would of course be to use numbers from an earlier run, as
+these are good initial values for convergence (The same thing Google
+does).
+
+\begin{figure}[!htbp]
+  \centering \includegraphics[width=0.95\textwidth]{./images/q410unid_85}
+  \caption{Shows squared difference plotted as a function of
+    iterations, with $p_i^{(0)} = \frac{1}{N}$ for all $i=1,\ldots,N$,
+    using $d = 0.85$}
+  \label{fig:q410unid_85}
+\end{figure}
+
+In figure \ref{fig:q410topd_85} is shown a plot of setting $p_i^{(0)}
+= 1$, where $[v \hspace{0.1cm} i] = \max(p)$ and $p_j^{(0)} = 0$ for
+all $j \neq i$.
+
+\begin{figure}[!htbp]
+  \centering \includegraphics[width=0.95\textwidth]{./images/q410topd_85}
+  \caption{Shows squared difference plotted as a function of
+    iterations, using $d = 0.85$}
+  \label{fig:q410topd_85}
+\end{figure}
+
+Figure \ref{fig:q410bottomd_85} shows the other way around, where
+$p_i^{(0)} = 1$ for the lowest PageRank index.
+
+\begin{figure}[!htbp]
+  \centering \includegraphics[width=0.95\textwidth]{./images/q410bottomd_85}
+  \caption{Shows squared difference plotted as a function of
+    iterations, using $d = 0.85$}
+  \label{fig:q410bottomd_85}
+\end{figure}
+
+When setting the highest or lowest ranked entry to 1, the number of
+iterations required for convergence is increased in both cases to 50
+iterations.
+
+The most important property of the www Google matrix is the fact that
+it is very sparse. This makes it possible to store rather 'large'
+matrices in memory without using that much memory on it.

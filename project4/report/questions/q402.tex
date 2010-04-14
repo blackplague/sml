@@ -1,0 +1,66 @@
+\subsection*{Question 4.2}
+
+We are to discretize the data into two classes of 'like' and 'dislike'
+based on their rating. The following mapping is therefore perform
+accoring to table \ref{tab:q42mapping}.
+
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{c @{$\rightarrow$} c}
+1, 2 & 2 \\
+4, 5 & 1
+\end{tabular}
+\caption{Shows mapping to perform discretization.}
+\label{tab:q42mapping}
+\end{table}
+
+We are now to use a probabilistic classifier to perform classification
+and prediction into the two classes and perform a 5-fold cross
+validation. I have chosen to use the \textit{mvnpdf} function within
+MatLab to model the data distributions, first using indenpendent
+covariance and then using shared covariance. Then finally using the
+logistic sigmoid to obtain a probability.
+
+Using no threshold $\Theta$ and independent covariance the following
+misclassification rates are obtained as seen in table
+\ref{tab:q42misctrte}.
+
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{r r r}
+Set number & Misclassification training & Misclassification test \\
+\hline
+1    & 27.58413 \% & 27.55433 \% \\
+2    & 28.85081 \% & 29.25815 \% \\
+3    & 28.93935 \% & 29.35016 \% \\
+4    & 28.51470 \% & 29.06646 \% \\
+5    & 31.87959 \% & 32.04572 \% \\
+Mean & 29.15372 \% & 29.45496 \% \\
+\end{tabular}
+\caption{Shows misclassification rates for training and test, along
+  with the mean.}
+\label{tab:q42misctrte}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{r r r}
+Set number & Misclassification training & Misclassification test \\
+\hline
+1 & 25.28272 \% & 25.33859 \% \\
+2 & 25.94355 \% & 26.95931 \% \\
+3 & 25.20672 \% & 25.47217 \% \\
+4 & 25.16882 \% & 25.90863 \% \\
+5 & 25.50446 \% & 25.41983 \% \\
+Mean & 25.42126 \% & 25.81970 \% \\
+\end{tabular}
+\caption{Shows misclassification rates for training and test, along with the mean with $\Theta = 0.60$.}
+\label{tab:q42misctrtet60}
+\end{table}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.95\textwidth]{./images/q42miscft}
+  \caption{Show the mean misclassification rate of training and test as a function of $\Theta$.}
+  \label{fig:q42miscft}
+\end{figure}

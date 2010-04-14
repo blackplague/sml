@@ -1,0 +1,264 @@
+\subsection*{Question 4.9}
+
+In the tables \ref{tab:q49top10ud50}--\ref{tab:q49bottom10md99} it is
+possible to investigate the top and bottom ranks for both users and
+movies. When using a lower damping factor the 'random' surfer is more
+likely to perform randoms jumps between the pages. This causes the
+PageRank of the top ranked pages to increase because the highest
+scoring ones have alot of links pointing to them, so the random surfer
+is more likely to visit these pages again after performing a random
+jump. This also means that the bottom pages are less likely to be
+visited resulting in a lower PageRank for these. I have tried to plot
+the top rated user as a function of the damping factor to see the
+development. This can be seen in figure \ref{fig:q49topuserd}, this
+shows that using a damping factor of $d \approx 0.6$ is optimal for
+this user. Which means that when the random surfer has approximately
+$0.40$ chance of jumping to a random page, this optimizes the top
+scoring user, because of the many links pointing to it.
+
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{llllll}
+User id & Age & Gender & Occupation & Zipcode & PageRank \\
+\hline
+405 & 22 & F & healthcare & 10019 & 0.008313 \\
+655 & 50 & F & healthcare & 60657 & 0.005963 \\
+181 & 26 & M & executive & 21218 & 0.005189 \\
+782 & 21 & F & artist & 33205 & 0.003277 \\
+13 & 47 & M & educator & 29206 & 0.003257 \\
+279 & 33 & M & programmer & 85251 & 0.002772 \\
+234 & 60 & M & retired & 94702 & 0.002660 \\
+450 & 35 & F & educator & 11758 & 0.001928 \\
+276 & 21 & M & student & 95064 & 0.001886 \\
+416 & 20 & F & student & 92626 & 0.001748 \\
+\end{tabular}
+\caption{Top 10 users according to PageRank, using $d = 0.50$}
+\label{tab:q49top10ud50}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{llllll}
+User id & Age & Gender & Occupation & Zipcode & PageRank \\
+\hline
+516 & 53 & F & librarian & 10021 & 0.000227 \\
+153 & 25 & M & student & 60641 & 0.000226 \\
+124 & 34 & M & student & 60615 & 0.000226 \\
+19 & 40 & M & librarian & 02138 & 0.000226 \\
+513 & 43 & M & administrator & 26241 & 0.000226 \\
+51 & 28 & M & educator & 16509 & 0.000225 \\
+93 & 48 & M & executive & 23112 & 0.000225 \\
+55 & 37 & M & programmer & 01331 & 0.000225 \\
+202 & 41 & F & educator & 60201 & 0.000224 \\
+700 & 17 & M & student & 76309 & 0.000221 \\
+\end{tabular}
+\caption{Bottom 10 users according to PageRank, using $d = 0.50$}
+\label{tab:q49bottom10ud50}
+\end{table}
+
+\begin{table}[!htbp]
+\hspace{-2cm}
+\begin{tabular}{lllll}
+Movie id & Title (Year) & Genre & Mean rating & PageRank \\
+\hline
+286 & English Patient, The (1996) & Drama,Romance,War, & 3.657 & 0.001749 \\
+258 & Contact (1997) & Drama,Sci-Fi, & 3.804 & 0.001725 \\
+288 & Scream (1996) & Horror,Thriller, & 3.441 & 0.001661 \\
+294 & Liar Liar (1997) & Comedy, & 3.157 & 0.001641 \\
+50 & Star Wars (1977) & Action,Adventure,Romance,Sci-Fi,War, & 4.358 & 0.001625 \\
+300 & Air Force One (1997) & Action,Thriller, & 3.631 & 0.001573 \\
+100 & Fargo (1996) & Crime,Drama,Thriller, & 4.156 & 0.001449 \\
+181 & Return of the Jedi (1983) & Action,Adventure,Romance,Sci-Fi,War, & 4.008 & 0.001404 \\
+313 & Titanic (1997) & Action,Drama,Romance, & 4.246 & 0.001304 \\
+1 & Toy Story (1995) & Animation,Children's,Comedy, & 3.878 & 0.001273 \\
+\end{tabular}
+\caption{Top 10 movies according to PageRank, using $d = 0.50$}
+\label{tab:q49top10md50}
+\end{table}
+
+\begin{table}[!htbp]
+\hspace{-2cm}
+\begin{tabular}{lllll}
+Movie id & Title (Year) & Genre & Mean rating & PageRank \\
+\hline
+1627 & Wife, The (1995) & Comedy,Drama, & 3.000 & 0.000192 \\
+1515 & Wings of Courage (1995) & Adventure,Romance, & 4.000 & 0.000192 \\
+1682 & Scream of Stone (Schrei aus Stein) (1991) & Drama, & 3.000 & 0.000192 \\
+1526 & Witness (1985) & Drama,Romance,Thriller, & 4.000 & 0.000192 \\
+1655 & Favor, The (1994) & Comedy,Romance, & 2.000 & 0.000192 \\
+1130 & Jupiter's Wife (1994) & Documentary, & 4.000 & 0.000192 \\
+1657 & Target (1995) & Action,Drama, & 3.000 & 0.000192 \\
+1599 & Someone Else's America (1995) & Drama, & 5.000 & 0.000192 \\
+1510 & Mad Dog Time (1996) & Crime, & 3.000 & 0.000192 \\
+1626 & Nobody Loves Me (Keiner liebt mich) (1994) & Comedy,Drama, & 1.000 & 0.000192 \\
+\end{tabular}
+\caption{Bottom 10 movies according to PageRank, using $d = 0.50$}
+\label{tab:q49bottom10md50}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{llllll}
+User id & Age & Gender & Occupation & Zipcode & PageRank \\
+\hline
+405 & 22 & F & healthcare & 10019 & 0.006524 \\
+655 & 50 & F & healthcare & 60657 & 0.005147 \\
+181 & 26 & M & executive & 21218 & 0.004069 \\
+13 & 47 & M & educator & 29206 & 0.003543 \\
+234 & 60 & M & retired & 94702 & 0.002728 \\
+279 & 33 & M & programmer & 85251 & 0.002668 \\
+450 & 35 & F & educator & 11758 & 0.002520 \\
+782 & 21 & F & artist & 33205 & 0.002474 \\
+276 & 21 & M & student & 95064 & 0.002438 \\
+416 & 20 & F & student & 92626 & 0.002308 \\
+\end{tabular}
+\caption{Top 10 users according to PageRank, using $d = 0.85$}
+\label{tab:q49top10ud85}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{llllll}
+User id & Age & Gender & Occupation & Zipcode & PageRank \\
+\hline
+441 & 50 & M & technician & 55013 & 0.000138 \\
+571 & 34 & M & artist & 01945 & 0.000137 \\
+516 & 53 & F & librarian & 10021 & 0.000137 \\
+636 & 47 & M & educator & 48043 & 0.000136 \\
+888 & 41 & M & scientist & 17036 & 0.000136 \\
+19 & 40 & M & librarian & 02138 & 0.000136 \\
+55 & 37 & M & programmer & 01331 & 0.000135 \\
+93 & 48 & M & executive & 23112 & 0.000133 \\
+202 & 41 & F & educator & 60201 & 0.000133 \\
+700 & 17 & M & student & 76309 & 0.000132 \\
+\end{tabular}
+\caption{Bottom 10 users according to PageRank, using $d = 0.85$}
+\label{tab:q49bottom10ud85}
+\end{table}
+
+\begin{table}[!htbp]
+\hspace{-2cm}
+\begin{tabular}{lllll}
+Movie id & Title (Year) & Genre & Mean rating & PageRank \\
+\hline
+50 & Star Wars (1977) & Action,Adventure,Romance,Sci-Fi,War, & 4.358 & 0.002492 \\
+258 & Contact (1997) & Drama,Sci-Fi, & 3.804 & 0.002387 \\
+286 & English Patient, The (1996) & Drama,Romance,War, & 3.657 & 0.002328 \\
+288 & Scream (1996) & Horror,Thriller, & 3.441 & 0.002271 \\
+294 & Liar Liar (1997) & Comedy, & 3.157 & 0.002264 \\
+100 & Fargo (1996) & Crime,Drama,Thriller, & 4.156 & 0.002192 \\
+181 & Return of the Jedi (1983) & Action,Adventure,Romance,Sci-Fi,War, & 4.008 & 0.002156 \\
+300 & Air Force One (1997) & Action,Thriller, & 3.631 & 0.002086 \\
+1 & Toy Story (1995) & Animation,Children's,Comedy, & 3.878 & 0.001928 \\
+121 & Independence Day (ID4) (1996) & Action,Sci-Fi,War, & 3.438 & 0.001807 \\
+\end{tabular}
+\caption{Top 10 movies according to PageRank, using $d = 0.85$}
+\label{tab:q49topm10d85}
+\end{table}
+
+\begin{table}[!htbp]
+\hspace{-2cm}
+\begin{tabular}{lllll}
+Movie id & Title (Year) & Genre & Mean rating & PageRank \\
+\hline
+1627 & Wife, The (1995) & Comedy,Drama, & 3.000 & 0.000061 \\
+1682 & Scream of Stone (Schrei aus Stein) (1991) & Drama, & 3.000 & 0.000061 \\
+1526 & Witness (1985) & Drama,Romance,Thriller, & 4.000 & 0.000061 \\
+1515 & Wings of Courage (1995) & Adventure,Romance, & 4.000 & 0.000061 \\
+1130 & Jupiter's Wife (1994) & Documentary, & 4.000 & 0.000061 \\
+1657 & Target (1995) & Action,Drama, & 3.000 & 0.000061 \\
+1599 & Someone Else's America (1995) & Drama, & 5.000 & 0.000061 \\
+1655 & Favor, The (1994) & Comedy,Romance, & 2.000 & 0.000061 \\
+1626 & Nobody Loves Me (Keiner liebt mich) (1994) & Comedy,Drama, & 1.000 & 0.000061 \\
+1476 & Raw Deal (1948) & Film-Noir, & 2.000 & 0.000061 \\
+\end{tabular}
+\caption{Bottom 10 movies according to PageRank, using $d = 0.85$}
+\label{tab:q49bottom10md85}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{llllll}
+User id & Age & Gender & Occupation & Zipcode & PageRank \\
+\hline
+405 & 22 & F & healthcare & 10019 & 0.003917 \\
+655 & 50 & F & healthcare & 60657 & 0.003570 \\
+13 & 47 & M & educator & 29206 & 0.003215 \\
+450 & 35 & F & educator & 11758 & 0.002689 \\
+276 & 21 & M & student & 95064 & 0.002581 \\
+416 & 20 & F & student & 92626 & 0.002456 \\
+537 & 36 & M & engineer & 22902 & 0.002437 \\
+234 & 60 & M & retired & 94702 & 0.002428 \\
+303 & 19 & M & student & 14853 & 0.002408 \\
+181 & 26 & M & executive & 21218 & 0.002334 \\
+\end{tabular}
+\caption{Top 10 users according to PageRank, using $d = 0.99$}
+\label{tab:q49top10ud99}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{llllll}
+User id & Age & Gender & Occupation & Zipcode & PageRank \\
+\hline
+572 & 51 & M & educator & 20003 & 0.000103 \\
+596 & 20 & M & artist & 77073 & 0.000103 \\
+895 & 31 & F & librarian & 32301 & 0.000103 \\
+441 & 50 & M & technician & 55013 & 0.000103 \\
+636 & 47 & M & educator & 48043 & 0.000102 \\
+19 & 40 & M & librarian & 02138 & 0.000102 \\
+571 & 34 & M & artist & 01945 & 0.000102 \\
+888 & 41 & M & scientist & 17036 & 0.000102 \\
+93 & 48 & M & executive & 23112 & 0.000102 \\
+202 & 41 & F & educator & 60201 & 0.000102 \\
+\end{tabular}
+\caption{Bottom 10 users according to PageRank, using $d = 0.99$}
+\label{tab:q49bottom10ud99}
+\end{table}
+
+\begin{table}[!htbp]
+\hspace{-2cm}
+\begin{tabular}{lllll}
+Movie id & Title (Year) & Genre & Mean rating & PageRank \\
+\hline
+50 & Star Wars (1977) & Action,Adventure,Romance,Sci-Fi,War, & 4.358 & 0.002885 \\
+258 & Contact (1997) & Drama,Sci-Fi, & 3.804 & 0.002539 \\
+100 & Fargo (1996) & Crime,Drama,Thriller, & 4.156 & 0.002516 \\
+181 & Return of the Jedi (1983) & Action,Adventure,Romance,Sci-Fi,War, & 4.008 & 0.002508 \\
+294 & Liar Liar (1997) & Comedy, & 3.157 & 0.002418 \\
+286 & English Patient, The (1996) & Drama,Romance,War, & 3.657 & 0.002406 \\
+288 & Scream (1996) & Horror,Thriller, & 3.441 & 0.002387 \\
+1 & Toy Story (1995) & Animation,Children's,Comedy, & 3.878 & 0.002236 \\
+300 & Air Force One (1997) & Action,Thriller, & 3.631 & 0.002156 \\
+121 & Independence Day (ID4) (1996) & Action,Sci-Fi,War, & 3.438 & 0.002121 \\
+\end{tabular}
+\caption{Top 10 movies according to PageRank, using $d = 0.99$}
+\label{tab:q49top10md99}
+\end{table}
+
+\begin{table}[!htbp]
+\hspace{-2cm}
+\begin{tabular}{lllll}
+Movie id & Title (Year) & Genre & Mean rating & PageRank \\
+\hline
+1627 & Wife, The (1995) & Comedy,Drama, & 3.000 & 0.000009 \\
+1526 & Witness (1985) & Drama,Romance,Thriller, & 4.000 & 0.000009 \\
+1682 & Scream of Stone (Schrei aus Stein) (1991) & Drama, & 3.000 & 0.000009 \\
+1515 & Wings of Courage (1995) & Adventure,Romance, & 4.000 & 0.000009 \\
+1130 & Jupiter's Wife (1994) & Documentary, & 4.000 & 0.000009 \\
+1599 & Someone Else's America (1995) & Drama, & 5.000 & 0.000009 \\
+1657 & Target (1995) & Action,Drama, & 3.000 & 0.000009 \\
+1655 & Favor, The (1994) & Comedy,Romance, & 2.000 & 0.000009 \\
+1626 & Nobody Loves Me (Keiner liebt mich) (1994) & Comedy,Drama, & 1.000 & 0.000009 \\
+1674 & Mamma Roma (1962) & Drama, & 4.000 & 0.000009 \\
+\end{tabular}
+\caption{Bottom 10 movies according to PageRank, using $d = 0.99$}
+\label{tab:q49bottom10md99}
+\end{table}
+
+\begin{figure}[!htbp]
+  \centering \includegraphics[width=0.95\textwidth]{./images/q49topuserd}
+  \caption{Shows the top user (id = 405) plottet as a function of the
+    damping factor in the interval 0.10--0.95 with 0.01 in step.}
+  \label{fig:q49topuserd}
+\end{figure}

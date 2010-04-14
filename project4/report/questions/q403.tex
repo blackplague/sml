@@ -1,0 +1,24 @@
+\subsection*{Question 4.3}
+
+We are to run the program \textit{matrixfactorization.m} to learn the
+$\mathbf{U}$ and $\mathbf{V}$ and report the training set and cross
+validation RMSE for different values of $K$ and $\lambda$. The result
+of these runs can be seen in figure \ref{fig:q43RMSEtrte}. I seem to
+have an plotting error or something else wrong with this, as it can be
+seen from the figure, the RMSE for test using $K = 5$ is always lower
+than using more latent dimension which does not really makes sense,
+according to the training set, the ones using higher latent dimensions
+should produce lower RMSE. If the RMSE for the test had been in the
+reverse order I would be more happy.
+
+\begin{figure}[!htbp]
+  \centering
+  \subfloat[\label{subfig:1}Training and test set 1.]{\includegraphics[width=0.45\textwidth]{./images/q43RMSEtrte1}} \hspace{0.5cm}
+  \subfloat[\label{subfig:2}Training and test set 2.]{\includegraphics[width=0.45\textwidth]{./images/q43RMSEtrte2}} \\
+  \subfloat[\label{subfig:3}Training and test set 3.]{\includegraphics[width=0.45\textwidth]{./images/q43RMSEtrte3}} \hspace{0.5cm}
+  \subfloat[\label{subfig:4}Training and test set 4.]{\includegraphics[width=0.45\textwidth]{./images/q43RMSEtrte4}} \\
+  \subfloat[\label{subfig:5}Training and test set 5.]{\includegraphics[width=0.45\textwidth]{./images/q43RMSEtrte5}} \hspace{0.5cm}
+  \subfloat[\label{subfig:mean}Training and test set cross validation.]{\includegraphics[width=0.45\textwidth]{./images/q43RMSEmean}} \\
+  \caption{RMSE for the five training and test sets and cross validation.}
+  \label{fig:q43RMSEtrte}
+\end{figure}

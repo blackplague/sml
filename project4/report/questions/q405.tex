@@ -1,0 +1,55 @@
+\subsection*{Question 4.5}
+
+We are first to perform PCA on the rows of the matrix $\mathbf{Y}$,
+this is the rows representing the users. Then we are to look for
+patterns, by annotating the plot with different kind of information
+for example user gender and such things.
+
+<Missing information>
+
+
+From figure \ref{fig:q45starwars} we see Starwars (1977) plotted along
+with it ten nearest neightbours using $k = 50$ and $\lambda = 5$
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.95\textwidth]{./images/q45starwars}
+  \caption{Shows Starwars (1977) along with its 10 nearest neighbours
+    and other movies. Starwars is annotated by the large red spot.}
+  \label{fig:q45starwars}
+\end{figure}
+
+When performing the movie centric visualization of the data by
+performing PCA on the rows of $\mathbf{V}$ a really clear pattern is
+found by plotting the all the movies and coloring them according to
+their mean rating, defined as the sum of all non-zero entries divided
+by the count of non-zero entries. The result of this plotting can be seen in figure \ref{fig:q45meanrating}
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.95\textwidth]{./images/q45meanrating}
+  \caption{Show all the movies colored according to their mean rating,
+    it is easy to see a clear pattern, where the movies are divided
+    into four group. And movies with a mean rating of $> 4.5$ is
+    scattered all over around the center.}
+  \label{fig:q45meanrating}
+\end{figure}
+
+We will now be looking a little more close at the movies which have a
+rating of $> 4.5$ to see if we can figure out what characterizes them.
+The plot of only these movies can be seen in figure \ref{fig:q45supermovies}
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.95\textwidth]{./images/q45supermovies}
+  \caption{Shows the movies scoring the highest mean rating, along
+    with their genre and number of rating per movie.}
+  \label{fig:q45supermovies}
+\end{figure}
+
+It is apperent that the reason why these movies have a high mean
+rating is the fact that there are almost no rating per movies, most of
+them have only one rating, and if this is a five, then it is bound to
+be amongst the top mean rated. Using a weighting scheme where also the
+amount of user rating per movie are taking into account would seem
+mostly appropriate.

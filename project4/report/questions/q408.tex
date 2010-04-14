@@ -1,0 +1,57 @@
+\subsection*{Question 4.8}
+
+The code for setting up the Google matrix is very simple, and could
+probably be made even simpler than it is already. The Google matrix is
+setup as follows
+
+\begin{equation*}
+  \mathbf{G} =
+  \left[ \begin{array}{c|c}
+      \mathbf{0} & \mathbf{R} \\
+      \hline
+      \mathbf{R}^{\textrm{T}} & \mathbf{0}
+\end{array} \right]      
+\end{equation*}
+
+Where the $\mathbf{R}$ is modified to show only ones and zeros, one if
+there is a connection between a user and movie. This is done in MatLab
+as shown in listing \ref{lst:googlematrix}.
+
+\begin{lstlisting}[caption={Creation of the Google matrix in Matlab}, captionpos=b,
+    label={lst:googlematrix}, float=h, numbers=none]
+  % Read in the rating matrix R given the path.
+  [ R, ~, ~, ~, ~ ] = ...
+    readmovielens('ml-data/', path );
+  
+  % Init sizes.
+  userSize = size(R,1); movieSize = size(R,2);
+  % Initialize G to zeros.
+  G = zeros(userSize+movieSize,userSize+movieSize);
+  
+  % Fill in ones where the R matrix entries are r > 0
+  G(1:userSize,userSize+1:end) = R>0;
+  G(userSize+1:end,1:userSize) = (R>0)';
+\end{lstlisting}
+
+To be able to scale up to www size it is necessary to use a sparse
+data structure. There are various ways of representing sparse
+matrices, below are listed the most common ones.
+\begin{itemize}
+\item DOK - Dictionary of Keys is commonly used to construct matrices,
+  afterwards it is converted to another type that supports efficient
+  sparse matrix arithmetic.
+\item LIL - List of Lists this is fast for incremental construction of
+  matrices. The entries are usually sorted according to column index
+  to allow faster lookup.
+\item COO - Coordinate List here the values of the matrix is stored in
+  the form $(\mathit{row}, \mathit{column}, \mathit{value})$, the
+  entries are usually sorted to allow faster random access. This is
+  also the standard way of defining a sparse matrix within MatLab.
+\item CSR - Compressed Sparse Row here the data is stored as follows
+  $(\mathit{value}, \mathit{column\_idx}, \mathit{row\_pointer})$ this
+  format is efficient for arithmetic operations, row slicing and
+  matrix-vector products.
+\item CSC - Same as CSR except its now an row index stored in second
+  place and a column pointer stored last, this results in fast
+  arithmetic operations, column slicing and matrix-vector products.
+\end{itemize}
