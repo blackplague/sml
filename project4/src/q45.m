@@ -1,8 +1,8 @@
-function [ output_args ] = q45( Comment )
+function [ output_args ] = q45( )
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 
-    function q45pca_a( X, Comment )
+    function q45pca_a( X )
         addpath('hfunc/')
         
         path = 'u.data';
@@ -14,54 +14,28 @@ function [ output_args ] = q45( Comment )
         
         [ratings, ~, user, ~, ~] = readmovielens('ml-data/', path);
         
-        user_age = user{1,2};
-        user_sex = user{1,3};
-        user_occupation = user{1,4};
-        user_zipcode = user{1,5};
-        
         r_m50_dis = ratings(:,50) < 3 & ratings(:,50) ~= 0;
         r_m50_like = ratings(:,50) > 3;
-        
-        uz = convertzipcodes( user_zipcode );
-        uo = convertoccupations( user_occupation );
-
-        user_sex = convertsex(user_sex);
         
         % 1 = technician  6 = administrator 11 = enterainment 16 = marketing      
         % 2 = programmer  7 = student       12 = librarian    17 = none
         % 3 = other       8 = lawyer        13 = homemaker    18 = healthcare
         % 4 = writer      9 = educator      14 = artist       19 = retired
         % 5 = executive  10 = scientist     15 = engineer
-        useroccupations = {'technician'; 'programmer'; 'other'; 'writer'; ...
-            'executive'; 'administrator'; 'student'; 'lawyer'; 'educator'; ...
-            'scientist'; 'enterainment'; 'librarian'; 'homemaker'; ...
-            'artist'; 'engineer'; 'marketing'; 'none'; 'healthcare'; 'retired'};
-        
-        selected_uo1 = 19;
-        selected_uo2 = 18;
-        selected_uo3 = 13;
-        
-        % Education
-        uo_idx1 = uo == getoccupationcode(useroccupations{selected_uo1});
-        uo_idx2 = uo == getoccupationcode(useroccupations{selected_uo2});
-        uo_idx3 = uo == getoccupationcode(useroccupations{selected_uo3});
-        
+         
+        librarian_indx = getOccupationIndex('librarian', user);
+        student_indx = getOccupationIndex('student', user);
+        educator_indx = getOccupationIndex('educator', user);
+                
         % Sexes
-        females = user_sex == 1;
-        males = user_sex == 0;
+        females = getGenderIndex('female', user);
+        males = getGenderIndex('male', user);
         
         % Ages
-        young = user_age < 24;
-        adult = 25 < user_age & user_age < 49;
-        elder = 50 < user_age;
+        young = getAgeIndex('young', user);
+        adult = getAgeIndex('adult', user);
+        elder = getAgeIndex('elder', user);
         
-        if(strcmp(Comment,'true'))
-            fprintf('\nSize of U: %d x %d\n', size(U,1), size(U,2))
-            fprintf('Size of S: %d x %d\n', size(S,1), size(S,2))
-            fprintf('Size of V: %d x %d\n', size(V,1), size(V,2))
-            fprintf('Size of User: %d x %d\n', size(User,1),size(User,2))
-            fprintf('Size of Movie: %d x %d\n', size(Movie,1), size(Movie,2))        
-        end
         
         % Plotting users based on sexes, female is red and male is blue
         figure(1)
@@ -103,7 +77,7 @@ function [ output_args ] = q45( Comment )
         
     end
 
-    function q45pca_b( X, Comment )
+    function q45pca_b( X )
         addpath('hfunc/')
         
         path = 'u.data';
@@ -116,53 +90,27 @@ function [ output_args ] = q45( Comment )
         [ratings, ~, user, ~, ~] = readmovielens('ml-data/', path);
         
         user_age = user{1,2};
-        user_sex = user{1,3};
-        user_occupation = user{1,4};
-        user_zipcode = user{1,5};
         
         r_m50_dis = ratings(:,50) < 3 & ratings(:,50) ~= 0;
         r_m50_like = ratings(:,50) > 3;
-        
-        uz = convertzipcodes( user_zipcode );
-        uo = convertoccupations( user_occupation );
-        
-        user_sex = convertsex(user_sex);
         
         % 1 = technician  6 = administrator 11 = enterainment 16 = marketing      
         % 2 = programmer  7 = student       12 = librarian    17 = none
         % 3 = other       8 = lawyer        13 = homemaker    18 = healthcare
         % 4 = writer      9 = educator      14 = artist       19 = retired
         % 5 = executive  10 = scientist     15 = engineer
-        useroccupations = {'technician'; 'programmer'; 'other'; 'writer'; ...
-            'executive'; 'administrator'; 'student'; 'lawyer'; 'educator'; ...
-            'scientist'; 'enterainment'; 'librarian'; 'homemaker'; ...
-            'artist'; 'engineer'; 'marketing'; 'none'; 'healthcare'; 'retired'};
-        
-        selected_uo1 = 19;
-        selected_uo2 = 18;
-        selected_uo3 = 13;
-        
-        % Education
-        uo_idx1 = uo == getoccupationcode(useroccupations{selected_uo1});
-        uo_idx2 = uo == getoccupationcode(useroccupations{selected_uo2});
-        uo_idx3 = uo == getoccupationcode(useroccupations{selected_uo3});
+        retired_idx = getOccupationIndex('retired', user);
+        healthcare_idx = getOccupationIndex('healthcare', user);
+        homemaker_idx = getOccupationIndex('homemaker', user);
         
         % Sexes
-        females = user_sex == 1;
-        males = user_sex == 0;
+        females = getGenderIndex('female', user);
+        males = getGenderIndex('male', user);
         
         % Ages
-        young = user_age < 24;
+        young = getAgeIndex('young', user);
         adult = 25 < user_age & user_age < 49;
         elder = 50 < user_age;
-        
-        if(strcmp(Comment,'true'))
-            fprintf('\nSize of U: %d x %d\n', size(U,1), size(U,2))
-            fprintf('Size of S: %d x %d\n', size(S,1), size(S,2))
-            fprintf('Size of V: %d x %d\n', size(V,1), size(V,2))
-            fprintf('Size of User: %d x %d\n', size(User,1),size(User,2))
-            fprintf('Size of Movie: %d x %d\n', size(Movie,1), size(Movie,2))        
-        end
         
         % Plotting users according to sexes.
 %         fig1 = figure(1);
@@ -226,9 +174,10 @@ function [ output_args ] = q45( Comment )
         % running SVD/PCA
         [ U S V ] = svd( Y, 0 );
         
-        [ratings, timestamps, user, movie, genre] = readmovielens('ml-data/', path);
+        size(U)
         
-        movie_id = movie{1,1};
+        [ratings, ~, ~, movie, ~] = readmovielens('ml-data/', path);
+        
         movie_title = movie{1,2};
         movie_genre = movie{1,7};
         
@@ -302,7 +251,9 @@ function [ output_args ] = q45( Comment )
         
     end
 
-    function run(Comment)
+    function run()
+        
+        addpath('./hfunc/')
         
         if(exist('mfvar.mat', 'file') ~= 2)
             fprintf('mfvar.mat not found performing matrixfactorization to save variables Y_mf U and V.')
@@ -315,22 +266,15 @@ function [ output_args ] = q45( Comment )
             load('mfvar.mat');
             fprintf('mfvar.mat found loaded variables Y_mf, U and V.')
         end
-       
-        if(strcmp(Comment, 'true'))
-            fprintf('\n')
-            fprintf('Size of Y: %d x %d\n', size(Y,1), size(Y,2))
-            fprintf('Size of U: %d x %d\n', size(U,1), size(U,2))
-            fprintf('Size of V: %d x %d\n', size(V,1), size(V,2))
-        end
         
-%         q45pca_a(Y_mf, Comment)
+        q45pca_a(Y_mf)
         
-%         q45pca_b(U, Comment)
+%         q45pca_b(U)
         
-        q45pca_c( V )
+%         q45pca_c( V )
         
     end
 
-run(Comment)
+run()
 
 end

@@ -27,6 +27,8 @@ function [ output_args ] = q43( input_args )
 
         K = [5 10 25 50 100]; lambda = [0 0.1 0.4 1 2 4 8 16 25];
         
+        % Colors for plotting the RMSE for training, test and cross
+        % validation.
         c = [ ...
             0 0 0; 1 0 0; 0 1 0; 0 1 1; 0 0 1; ...
             1 1 0; 1 0 1; 1 0.3 0.6; 0.3 1 0.6; 0.7 1 0.2 ...
@@ -50,7 +52,7 @@ function [ output_args ] = q43( input_args )
                 RMSEmean_tr = RMSEmean_tr + RMSE;
                 RMSEmean_te = RMSEmean_te + RMSEte;
                 
-                figure(i)
+                fig = figure(i);
                 hold on
                 for j=1:length(K)
                     plot(lambda(:), RMSE(j,:), '-', 'LineWidth', 1, 'Color', c(j,:))
@@ -72,17 +74,15 @@ function [ output_args ] = q43( input_args )
                 xlabel('Lambda')
                 ylabel('RMSE')
                 hold off
-                
+            saveas(fig, ['../report/images/q43RMSEtrte' num2str(i)], 'epsc')
             end
             
             RMSEmean_tr = RMSEmean_tr/length(K);
             RMSEmean_te = RMSEmean_te/length(K);
             
-            figure(6)
+            fig6 = figure(6);
             hold on
             for i=1:length(K)
-%                 RMSEmean(i) = RMSEmean_tr{i};
-%                 RMSEmeante(i) = RMSEmean_te{i};
                 plot(lambda(:), RMSEmean_tr(i,:), '-', 'LineWidth', 1, 'Color', c(i,:))
                 plot(lambda(:), RMSEmean_te(i,:), '-', 'LineWidth', 1, 'Color', c(length(K)+i, :))
             end
@@ -98,11 +98,11 @@ function [ output_args ] = q43( input_args )
                 ['K = ' num2str(K(5)) ' train'], ...
                 ['K = ' num2str(K(5)) ' test'], ...
                 'Location', 'SouthEast')
-            title(['RMSE mean training and test '])
+            title(['RMSE Cross validation for training and test'])
             xlabel('Lambda')
             ylabel('RMSE')
             hold off
-            
+            saveas(fig6, '../report/images/q43RMSEmean', 'epsc')
         end
         
 %         if(exist('mfvar.mat', 'file') ~= 2)

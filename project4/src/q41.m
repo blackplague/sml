@@ -20,6 +20,9 @@ function q41( ~ )
         w_ml = inv(Phi1'*Phi1)*Phi1'*rv;
         
         y_1 = Phi1 * w_ml;
+
+        % Truncate values over 5 to 5, and below 0 to 0.
+        y_1(y_1 > 5) = 5; y_1(y_1 < 0) = 0;
         
         RMSE = sqrt(sum((rv-y_1).^2)/length(y_1));
         
@@ -33,6 +36,8 @@ function q41( ~ )
         Phi1 = generate_designmatrix(uf(:,3:end), phifn);        
         
         y_1test = Phi1 * w_ml;
+        
+        y_1test(y_1test > 5) = 5; y_1test(y_1test < 0) = 0;
         
         RMSE = sqrt(sum((rv-y_1test).^2)/length(y_1test));
         
@@ -86,6 +91,9 @@ function q41( ~ )
         end
         fprintf('\n')
         
+        fprintf('Mean RMSE training: %2.6f\n', mean(RMSEtrain))
+        fprintf('Mean RMSE test: %2.6f\n', mean(RMSEtest))        
+        
         for i=1:length(w_ml)
             fprintf('w%d\t', i)
         end
@@ -108,6 +116,8 @@ function q41( ~ )
             fprintf('RMSE%d (avg): %2.6f\t ', i, RMSEtest_avg(i,1) )
         end
         fprintf('\n')
+
+        fprintf('Mean RMSE test (Based on mean w_ml): %2.6f\n', mean(RMSEtest_avg))        
         
         mean_vec = zeros(5,1682);
         RMSE_mean = zeros(5,1);

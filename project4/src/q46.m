@@ -55,24 +55,24 @@ function [ output_args ] = q46( input_args )
         % 3 = other       8 = lawyer        13 = homemaker    18 = healthcare
         % 4 = writer      9 = educator      14 = artist       19 = retired
         % 5 = executive  10 = scientist     15 = engineer
-        educator_indx = getOccupationIndex('educator', user);
-        programmer_indx = getOccupationIndex('programmer', user);
-        technician_indx = getOccupationIndex('technician', user);
-        writer_indx = getOccupationIndex('writer', user);
-        executive_indx = getOccupationIndex('executive', user);
-        administrator_indx = getOccupationIndex('administrator', user);
-        student_indx = getOccupationIndex('student', user);
-        lawyer_indx = getOccupationIndex('lawyer', user);
-        scientist_indx = getOccupationIndex('scientist', user);
-        entertainment_indx = getOccupationIndex('entertainment', user);
-        librarian_indx = getOccupationIndex('librarian', user);
-        homemaker_indx = getOccupationIndex('homemaker', user);
-        artist_indx = getOccupationIndex('artist', user);
-        engineer_indx = getOccupationIndex('engineer', user);
-        marketing_indx = getOccupationIndex('marketing', user);
-        none_indx = getOccupationIndex('none', user);
-        healthcare_indx = getOccupationIndex('healthcare', user);
-        retired_indx = getOccupationIndex('retired', user);
+%         educator_indx = getOccupationIndex('educator', user);
+%         programmer_indx = getOccupationIndex('programmer', user);
+%         technician_indx = getOccupationIndex('technician', user);
+%         writer_indx = getOccupationIndex('writer', user);
+%         executive_indx = getOccupationIndex('executive', user);
+%         administrator_indx = getOccupationIndex('administrator', user);
+%         student_indx = getOccupationIndex('student', user);
+%         lawyer_indx = getOccupationIndex('lawyer', user);
+%         scientist_indx = getOccupationIndex('scientist', user);
+%         entertainment_indx = getOccupationIndex('entertainment', user);
+%         librarian_indx = getOccupationIndex('librarian', user);
+%         homemaker_indx = getOccupationIndex('homemaker', user);
+%         artist_indx = getOccupationIndex('artist', user);
+%         engineer_indx = getOccupationIndex('engineer', user);
+%         marketing_indx = getOccupationIndex('marketing', user);
+%         none_indx = getOccupationIndex('none', user);
+%         healthcare_indx = getOccupationIndex('healthcare', user);
+%         retired_indx = getOccupationIndex('retired', user);
         
         % kmeans clustering, seeds to make them the same.
         rand( 'seed', 0 ); %#ok
@@ -181,7 +181,7 @@ function [ output_args ] = q46( input_args )
         k = [3];
         textOn = 'true';
         
-        q46knn(k, space, textOn);
+        q46knn([2 10], space, textOn);
     end
     run()
 end
